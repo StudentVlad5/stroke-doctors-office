@@ -7,7 +7,7 @@ const Table = styled.table`
   color: ${theme.colors.black};
   table-layout: fixed;
   border-collapse: collapse;
-  margin-bottom: 45px;
+  margin-bottom: 60px;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     table-layout: auto;

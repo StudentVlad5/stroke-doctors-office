@@ -38,8 +38,7 @@ img {
 
   display: inline-flex;
   gap: 8px;
-  /* width: 100%; */
-  /* margin: auto auto 45px auto; */
+  margin-bottom:20px;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     gap: 10px;

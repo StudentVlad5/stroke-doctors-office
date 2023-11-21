@@ -26,7 +26,7 @@ const ArchivePage = () => {
             type="button"
             aria-label="Перейти к списку архива чек-листов"
           >
-            Активні чек-листи
+            Активные чек-листы
           </ButtonToArhiveList>
         </Link>
         <Link style={{ textDecoration: 'none' }} to="/">

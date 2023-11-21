@@ -37,9 +37,9 @@ import {
 } from './CheckListDetails.styled';
 import clipboardCopy from 'clipboard-copy';
 import { useParams } from 'react-router-dom';
-import { export2Doc } from 'services/exportToWord';
 import { theme } from 'components/baseStyles/Variables.styled';
 import moment from 'moment';
+import { export2Docx } from 'services/exportToWord'; 
 
 export const CheckListDetails = () => {
   const [data, setData] = useState([]);
@@ -255,7 +255,7 @@ export const CheckListDetails = () => {
       setTimeout(() => setIsCopied(false), 3000);
     });
   };
-
+  
   return (
     <Container>
       {isLoading ? onLoading() : onLoaded()}
@@ -291,7 +291,7 @@ export const CheckListDetails = () => {
             </CheckListBtn>
             <CheckListBtn
               type="button"
-              onClick={() => export2Doc('exportContent', data?.patientFullName)}
+              onClick={() => export2Docx('exportContent', data?.patientFullName)}
             >
               <WordIcon /> Скачать в word
             </CheckListBtn>
@@ -552,7 +552,17 @@ export const CheckListDetails = () => {
                     : '-'}
                 </TdSmall>
               </Tr>
-              <Tr>
+              <TrRed
+                $props={
+                  (data?.hemorrhages &&
+                    data?.hemorrhages.toString() === 'true') ||
+                  (data?.SACStroke && data?.SACStroke.toString() === 'true') ||
+                  (data?.ischemicStroke &&
+                    data?.ischemicStroke.toString() === 'true')
+                    ? theme.colors.accentCoral
+                    : theme.colors.darkGrey
+                }
+              >
                 <TdSmall>ОНМК ранее</TdSmall>
                 <TdSmall>
                   {(data?.hemorrhages &&
@@ -563,9 +573,9 @@ export const CheckListDetails = () => {
                     ? 'Да'
                     : ''}
                 </TdSmall>
-              </Tr>
+              </TrRed>
               <Tr>
-                <TdSmall style={{ paddingLeft: 35 }}>Гемморагический</TdSmall>
+                <TdSmall style={{ paddingLeft: 60 }}>Гемморагический</TdSmall>
                 <TdSmall>
                   {data?.hemorrhages && data?.hemorrhages.toString() === 'true'
                     ? 'Да'
@@ -573,7 +583,7 @@ export const CheckListDetails = () => {
                 </TdSmall>
               </Tr>
               <Tr>
-                <TdSmall style={{ paddingLeft: 35 }}>САК</TdSmall>
+                <TdSmall style={{ paddingLeft: 60 }}>САК</TdSmall>
                 <TdSmall>
                   {data?.SACStroke && data?.SACStroke.toString() === 'true'
                     ? 'Да'
@@ -588,7 +598,7 @@ export const CheckListDetails = () => {
                     : theme.colors.darkGrey
                 }
               >
-                <TdSmall style={{ paddingLeft: 35 }}>
+                <TdSmall style={{ paddingLeft: 60 }}>
                   Ишемический инсульт
                 </TdSmall>
                 <TdSmall>

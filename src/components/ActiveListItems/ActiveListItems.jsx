@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import {
-    ActiveListItemsSection, ActiveListItemsContainer, ControlContainer, TotalItems, ButtonToArhiveList, ButtonLogOut, BtnContainer, ItemsContainer, ControlPanelContainer, Title, ItemContainer, ItemInfo, ItemStatistic, ItemBtn, ItemCircle, ItemLine
+    ActiveListItemsSection, ActiveListItemsContainer, ControlContainer, TotalItems, ButtonToArhiveList, ButtonLogOut, BtnContainer, ItemsContainer, ControlPanelContainer, Title, ItemContainer, ItemInfo, ItemStatistic, ItemBtn, ItemCircle, ItemLine, BtnWrap
   } from './ActiveListItems.styled';
 import { removeItem } from 'services/localStorService';
 import { theme } from 'components/baseStyles/Variables.styled';
@@ -21,6 +21,7 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
         setIsLoading(true);
         try {
           const { data } = await fetchData('read?identifier=*');
+          // &checkStatus="Активный"
           if (!data) {
             return onFetchError('Whoops, something went wrong');
           }
@@ -70,10 +71,16 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
                 {uniqueChecklists && uniqueChecklists?.length > 0 && 
                 uniqueChecklists.map((item)=>(item?.identifier !== undefined && item?.identifier !== '') && <ItemContainer key={item?.identifier} data-info={item?.identifier}>
                     <ItemInfo>
-                      Чек-лист №{item?.identifier} от {moment(new Date(+item?.identifier)).format("DD/MM/YYYY")} Бригада №{item?.application_number} Время прибытия в больницу {item?.deliveryTimeHh} : {item?.deliveryTimeMm} Номер телефона: {item?.numberPhone}
-                      <Link style={{textDecoration:"none"}} to={`/checklist/${item.identifier}`}>
-                      <ItemBtn type="button" aria-label="Подробнее">Подробнее</ItemBtn>
-                      </Link>
+                      <p>Чек-лист №{item?.identifier}</p>
+                      <p>от {moment(new Date(+item?.identifier)).format("DD/MM/YYYY")}</p>
+                      <br/>Бригада №{item?.application_number}
+                      <p><br/>Время прибытия в больницу {(item?.deliveryTimeHh && item?.deliveryTimeHh.length < 2) ? "0" + item?.deliveryTimeHh : item?.deliveryTimeHh} : {(item?.deliveryTimeMm && item?.deliveryTimeMm.length < 2) ? "0" + item?.deliveryTimeMm : item?.deliveryTimeMm}</p>
+                      <p>Номер телефона: {item?.numberPhone}</p>
+                      <BtnWrap>
+                        <Link style={{textDecoration:"none"}} to={`/checklist/${item.identifier}`}>
+                            <ItemBtn type="button" aria-label="Подробнее">Подробнее</ItemBtn>
+                        </Link>
+                      </BtnWrap>
                     </ItemInfo>
                     <ItemStatistic>
                         <ItemCircle $props={(

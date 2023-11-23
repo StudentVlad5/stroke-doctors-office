@@ -194,12 +194,14 @@ export const Td = styled.td`
   height: 75px;
 
   color: ${theme.colors.black};
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 24px;
+  }
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 28px;
   }
 `;
@@ -210,12 +212,15 @@ export const TdSmall = styled.td`
   height: 75px;
 
   color: ${theme.colors.black};
-  font-size: 20px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 24px;
+  }
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 28px;
   }
 `;

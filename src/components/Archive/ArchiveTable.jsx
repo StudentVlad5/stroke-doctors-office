@@ -45,43 +45,16 @@ export const ArchiveTable = () => {
   const [uniqueChecklists, setUniqueChecklists] = useState([]);
   const [filterChecklists, setFilterChecklists] = useState([]);
   const [filters, setFilters] = useState(initialState);
-  // const [filters, setFilters] = useState(
-  //   getFromStorage('filters') ? getFromStorage('filters') : initialState
-  // );
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [reload, setReload] = useState(false);
-
-  /* --- get archive checklists --- */
-  // function getWeekNumber(date) {
-  //   if (new Date(date).getDay() === 0) {
-  //     const startOfYear = new Date(date.getFullYear(), 0, 1);
-  //     const startOfWeek = new Date(
-  //       startOfYear.setDate(startOfYear.getDate() - startOfYear.getDay())
-  //     );
-
-  //     const diffInTime = date.getTime() - startOfWeek.getTime();
-  //     const diffInWeeks = Math.floor(diffInTime / (1000 * 3600 * 24 * 7));
-
-  //     return diffInWeeks;
-  //   }
-
-  //   const startOfYear = new Date(date.getFullYear(), 0, 1);
-  //   const startOfWeek = new Date(
-  //     startOfYear.setDate(startOfYear.getDate() - startOfYear.getDay())
-  //   );
-
-  //   const diffInTime = date.getTime() - startOfWeek.getTime();
-  //   const diffInWeeks = Math.floor(diffInTime / (1000 * 3600 * 24 * 7));
-
-  //   return diffInWeeks + 1; // Add 1 to account for the first week
-  // }
 
   useEffect(() => {
     (async function getData() {
       setIsLoading(true);
       try {
         const { data } = await fetchData('read?identifier=*');
+        // // &checkStatus="Архивный"
         if (!data) {
           return onFetchError('Whoops, something went wrong');
         }
@@ -89,15 +62,6 @@ export const ArchiveTable = () => {
         const sortedData = data.normal.sort(
           (a, b) => b.identifier - a.identifier
         );
-
-        /* --- data filter this week --- */
-        // const today = new Date();
-        // const currentWeekNumber = getWeekNumber(today);
-        // const archiveChecklists = sortedData.filter(
-        //   ({ identifier }) =>
-        //     currentWeekNumber === getWeekNumber(new Date(Number(identifier))) &&
-        //     today.getDay() >= new Date(Number(identifier)).getDay()
-        // );
 
         /* --- get unique identifier from archive checklists--- */
         const uniqueIdentifiers = [];
@@ -150,20 +114,6 @@ export const ArchiveTable = () => {
       }
     })();
   }, [reload]);
-
-  /* --- get selected filter elements after refresh--- */
-  // const handleActiveInput = key => {
-  //   const filtersFromLS = getFromStorage('filters');
-  //   const selectedFilters = filtersFromLS[key];
-  //   if (selectedFilters) {
-  //     const inputs = document.querySelectorAll(`input[name="${key}"]`);
-  //     inputs?.forEach(input => input.classList.add('active'));
-  //   }
-  // };
-
-  // const getActiveInput = () => {
-  //   Object.keys(initialState).forEach(filter => handleActiveInput(filter));
-  // };
 
   const handleChangeFilter = e => {
     e.preventDefault();
@@ -566,7 +516,7 @@ export const ArchiveTable = () => {
                   </TableData>
                   {item.startTimeAutoHh && item.startTimeAutoMm ? (
                     <TableData>
-                      {item.startTimeAutoHh}:{item.startTimeAutoMm}
+                      {item.startTimeAutoHh.length < 2 ? "0" + item.startTimeAutoHh : item.startTimeAutoHh}:{item.startTimeAutoMm.length < 2 ? "0" + item.startTimeAutoMm : item.startTimeAutoMm}
                     </TableData>
                   ) : (
                     <TableData></TableData>

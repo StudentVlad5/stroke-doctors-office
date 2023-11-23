@@ -44,12 +44,9 @@ import { export2Docx } from 'services/exportToWord';
 export const CheckListDetails = () => {
   const [data, setData] = useState([]);
   const [isCopied, setIsCopied] = useState(false);
-  const [inputData, setInputData] = useState({
-    numberHospital: data?.numberHospital || '',
-    hospitalizationTime: data?.hospitalizationTime || '',
-    hospitalizationDate: data?.hospitalizationDate || '',
-  });
-
+  const [inputDataNumberHospital, setInputDataNumberHospital] = useState('');
+  const [inputDataHospitalizationTime, setInputDataHospitalizationTime] = useState('');
+  const [inputDataHospitalizationDate, setInputDataHospitalizationDate] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const routerParams = useParams();
@@ -68,11 +65,14 @@ export const CheckListDetails = () => {
     (async function getData() {
       setIsLoading(true);
       try {
-        const { data } = await fetchData(`read?identifier=${id}`); //1696580949776
+        const { data } = await fetchData(`read?identifier=${id}`); 
         if (!data) {
           return onFetchError('Whoops, something went wrong');
         }
         setData(data.normal);
+        if(data.normal?.numberHospital){setInputDataNumberHospital(data.normal?.numberHospital)};
+        if(data.normal?.hospitalizationTime){setInputDataHospitalizationTime(data.normal?.hospitalizationTime)};
+        if(data.normal?.hospitalizationDate){setInputDataHospitalizationDate(data.normal?.hospitalizationDate)};
       } catch (error) {
         setError(error);
       } finally {
@@ -85,14 +85,14 @@ export const CheckListDetails = () => {
     e.preventDefault();
 
     const identifier = id;
-    const data_numberHospital = inputData.numberHospital;
-    const data_hospitalizationTime = inputData.hospitalizationTime;
-    const data_hospitalizationDate = inputData.hospitalizationDate;
+    // const data_numberHospital = inputData.numberHospital;
+    // const data_hospitalizationTime = inputData.hospitalizationTime;
+    // const data_hospitalizationDate = inputData.hospitalizationDate;
 
     try {
       setIsLoading(true);
       const res = await fetchData(
-        `edit?identifier=${identifier}&numberHospital=${data_numberHospital}&hospitalizationTime=${data_hospitalizationTime}&hospitalizationDate=${data_hospitalizationDate}`
+        `edit?identifier=${identifier}&numberHospital=${inputDataNumberHospital}&hospitalizationTime=${inputDataHospitalizationTime}&hospitalizationDate=${inputDataHospitalizationDate}`
       );
       if (!res) {
         return onFetchError('Whoops, something went wrong');
@@ -308,6 +308,10 @@ export const CheckListDetails = () => {
               <Tr>
                 <Td>ИИН пациента</Td>
                 <Td>{data?.patientINN}</Td>
+              </Tr>
+              <Tr>
+                <Td>Пол пациента</Td>
+                <Td>{data?.patientSex}</Td>
               </Tr>
               <Tr>
                 <Td>Визуальное описание - при отсутствии личных данных</Td>
@@ -698,7 +702,7 @@ export const CheckListDetails = () => {
               <Tr>
                 <Td>Заполнение чек-листа начато</Td>
                 <Td>
-                  {data?.startTimeAutoHh}:{data?.startTimeAutoMm}{' '}
+                  {(data?.startTimeAutoHh && data?.startTimeAutoHh.length < 2) ? "0" + data?.startTimeAutoHh : data?.startTimeAutoHh}:{(data?.startTimeAutoMm && data?.startTimeAutoMm.length < 2) ? "0" + data?.startTimeAutoMm : data?.startTimeAutoMm}{' '}
                   {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
                 </Td>
               </Tr>
@@ -726,14 +730,9 @@ export const CheckListDetails = () => {
               </AdditionalInfoFormText>
               <AdditionalInfoFormInput
                 type="text"
-                value={inputData.numberHospital || data?.numberHospital || ''}
+                value={inputDataNumberHospital}
                 onChange={e =>
-                  setInputData({
-                    ...data,
-                    numberHospital:
-                      e.target.value || data?.numberHospital || '',
-                  })
-                }
+                  setInputDataNumberHospital(e.target.value)}
               />
             </AdditionalInfoFormLable>
 
@@ -741,41 +740,19 @@ export const CheckListDetails = () => {
               <AdditionalInfoFormText>
                 Дата и время госпитализации
               </AdditionalInfoFormText>
-
               <AdditionalInfoDataLableBox>
                 <AdditionalInfoDataLable>
                   <AdditionalInfoDataInput
                     type="time"
-                    value={
-                      inputData.hospitalizationTime ||
-                      data?.hospitalizationTime ||
-                      ''
-                    }
-                    onChange={e =>
-                      setInputData({
-                        ...data,
-                        hospitalizationTime:
-                          e.target.value || data?.hospitalizationTime || '',
-                      })
-                    }
+                    value={inputDataHospitalizationTime}
+                    onChange={e =>setInputDataHospitalizationTime(e.target.value)}
                   />
                 </AdditionalInfoDataLable>
-
                 <AdditionalInfoDataLable2>
                   <AdditionalInfoDataInput2
                     type="date"
-                    value={
-                      inputData.hospitalizationDate ||
-                      data?.hospitalizationDate ||
-                      ''
-                    }
-                    onChange={e =>
-                      setInputData({
-                        ...data,
-                        hospitalizationDate:
-                          e.target.value || data?.hospitalizationDate || '',
-                      })
-                    }
+                    value={inputDataHospitalizationDate}
+                    onChange={e =>setInputDataHospitalizationDate(e.target.value)}
                   />
                 </AdditionalInfoDataLable2>
               </AdditionalInfoDataLableBox>

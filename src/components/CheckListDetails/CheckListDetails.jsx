@@ -396,7 +396,7 @@ export const CheckListDetails = () => {
               >
                 <Td>Артериальное давление</Td>
                 <Td>
-                  {data?.arterialPressureS}/{data?.arterialPressureD}
+                  {data?.arterialPressureS}<br/>{data?.arterialPressureD}
                 </Td>
                 <Td>мм. рт. ст.</Td>
               </TrRed>

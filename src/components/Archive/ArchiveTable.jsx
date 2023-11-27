@@ -469,8 +469,8 @@ export const ArchiveTable = () => {
             </TableHead>
             <TableHead>
               <span>
-                Время от времени до <br />
-                госпитализации <br />
+                Время от прибытия пациента <br />
+                до госпитализации <br />
                 (от двери до иглы)
               </span>
               <input
@@ -522,12 +522,7 @@ export const ArchiveTable = () => {
                     <TableData></TableData>
                   )}
                   <TableData>
-                    {new Date(item?.identifier).getHours() -
-                      new Date(item?.identifier).getHours()}{' '}
-                    часов{' '}
-                    {new Date(item?.identifier).getMinutes() -
-                      new Date(item?.identifier).getMinutes()}{' '}
-                    минут
+                    {item?.timeStartToEndHospitality ? item?.timeStartToEndHospitality : "-"} 
                   </TableData>
                 </TableRow>
               ))}

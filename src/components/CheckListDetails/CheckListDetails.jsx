@@ -54,7 +54,8 @@ export const CheckListDetails = () => {
   const checkData = {
     bloodSugarLevelMin: 2.7,
     bloodSugarLevelMax: 22,
-    bodyTemperature: 37,
+    bodyTemperatureMin: 35.9,
+    bodyTemperatureMax: 37.3,
     arterialPressureS: 110,
     arterialPressureD: 180,
     patientAgeMin: 17,
@@ -106,18 +107,18 @@ export const CheckListDetails = () => {
 
   const handleCopy = () => {
     const patientData = `
-    Чек-лист №${data?.identifier}
-    от ${moment(new Date(+data?.identifier)).format('DD/MM/YYYY')}
-    Бригада ${data?.application_number}
-    Предполагаемое время прибытия в больницу: ${data?.deliveryTimeHh}:${
-      data?.deliveryTimeMm
+    Чек-лист №${data?.identifier ? data?.identifier : ''}
+    от ${data?.identifier ? moment(new Date(+data?.identifier)).format('DD/MM/YYYY') : ''}
+    Бригада ${data?.application_number ? data?.application_number : ''}
+    Предполагаемое время прибытия в больницу: ${data?.deliveryTimeHh? data?.deliveryTimeHh : ''}:${ data?.deliveryTimeMm ? data?.deliveryTimeMm : ''
     }
-    Номер телефона: ${data?.numberPhone}
+    Номер телефона: ${data?.numberPhone ? data?.numberPhone : ''}
 
     Личные данные пациента:
-      ФИО пациента: ${data?.patientFullName}
-      ИИН пациента: ${data?.patientINN}
-      Визуальное описание: ${data?.visualDescription}
+      ФИО пациента: ${data?.patientFullName ? data?.patientFullName : ''}
+      ИИН пациента: ${data?.patientINN ? data?.patientINN : ''}
+      Пол пациента: ${data?.patientSex ? data?.patientSex : ''}
+      Визуальное описание: ${data?.visualDescription ? data?.visualDescription : ''}
 
     Методика F-A-S-T:
       Провисание на лице: ${
@@ -137,16 +138,16 @@ export const CheckListDetails = () => {
       }
       Время появления первых симптомов: ${data?.firstSymptomsTimeHh}:${
       data?.firstSymptomsTimeMm
-    } 31.08.2023
+    } 
 
     Физиологические параметры:
-      Содержание сахара в крови: ${data?.bloodSugarLevel} ммоль/л
-      Температура тела: ${data?.bodyTemperature} °C
-      Артериальное давление: ${data?.arterialPressureD}/${
-      data?.arterialPressureS
+      Содержание сахара в крови: ${data?.bloodSugarLevel ? data?.bloodSugarLevel : ''} ммоль/л
+      Температура тела: ${data?.bodyTemperature ? data?.bodyTemperature: ''} °C
+      Артериальное давление: ${data?.arterialPressureD ? data?.arterialPressureD : ''}/${
+      data?.arterialPressureS ? data?.arterialPressureS : ''
     } мм. рт. ст.
-      Масса тела пациента: ${data?.patientBodyWeight} кг
-      Возраст пациента: ${data?.patientAge} лет
+      Масса тела пациента: ${data?.patientBodyWeight ? data?.patientBodyWeight : ''} кг
+      Возраст пациента: ${data?.patientAge ? data?.patientAge : ''} лет
 
     Анамнез:
       Внутричерепные кровоизлияния: ${
@@ -230,13 +231,13 @@ export const CheckListDetails = () => {
        }
 
     Данные по заполнителю:
-      ФИО сотрудника: ${data?.medicalStaffFullName}
-      № бригады СМП: №${data?.application_number}
-      Заполнение чек-листа начато: ${data?.startTimeAutoHh}:${
-      data?.startTimeAutoMm
+      ФИО сотрудника: ${data?.medicalStaffFullName ? data?.medicalStaffFullName : ''}
+      № бригады СМП: №${data?.application_number ? data?.application_number : ''}
+      Заполнение чек-листа начато: ${data?.startTimeAutoHh ? data?.startTimeAutoHh : ' '}:${
+      data?.startTimeAutoMm ? data?.startTimeAutoMm : ' '
     } ${moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
-      Заполнение чек-листа завершено:${data?.endTimeAutoHh}:${
-      data?.endTimeAutoMm
+      Заполнение чек-листа завершено:${data?.endTimeAutoHh ? data?.endTimeAutoHh : ' '}:${
+      data?.endTimeAutoMm ? data?.endTimeAutoMm : ' '
     } ${moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
 
     Дополнительная информация от инсультного центра:
@@ -376,7 +377,7 @@ export const CheckListDetails = () => {
               </TrRed>
               <TrRed
                 $props={
-                  Number(data?.bodyTemperature) < checkData.bodyTemperature
+                  Number(data?.bodyTemperature) < checkData.bodyTemperatureMin || Number(data?.bodyTemperature) > checkData.bodyTemperatureMax
                     ? theme.colors.accentCoral
                     : theme.colors.darkGrey
                 }

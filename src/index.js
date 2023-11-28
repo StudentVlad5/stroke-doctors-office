@@ -6,10 +6,10 @@ import { GlobalStyle } from "components/baseStyles/GlobalStyle";
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter basename="stroke-doctors-office">
       <GlobalStyle />
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );

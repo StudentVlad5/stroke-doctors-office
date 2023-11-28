@@ -694,16 +694,18 @@ export const CheckListDetails = () => {
             <tbody>
               <Tr>
                 <Td>ФИО сотрудника</Td>
-                <Td>{data?.medicalStaffFullName}</Td>
+                <Td>{data?.medicalStaffFullName ? data?.medicalStaffFullName : ''}</Td>
               </Tr>
               <Tr>
                 <Td>№ бригады СМП</Td>
-                <Td>№{data?.application_number}</Td>
+                <Td>№{data?.application_number ? data?.application_number: ''}</Td>
               </Tr>
               <Tr>
                 <Td>Заполнение чек-листа начато</Td>
                 <Td>
-                  {(data?.startTimeAutoHh && data?.startTimeAutoHh.length < 2) ? "0" + data?.startTimeAutoHh : data?.startTimeAutoHh}:{(data?.startTimeAutoMm && data?.startTimeAutoMm.length < 2) ? "0" + data?.startTimeAutoMm : data?.startTimeAutoMm}{' '}
+                  {(data?.startTimeAutoHh && data?.startTimeAutoHh.length < 2) ? "0" + data?.startTimeAutoHh : data?.startTimeAutoHh}
+                  {(data?.startTimeAutoHh && data?.startTimeAutoMm) ? ':' : '-'}
+                  {(data?.startTimeAutoMm && data?.startTimeAutoMm.length < 2) ? "0" + data?.startTimeAutoMm : data?.startTimeAutoMm}{' '}
                   {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
                 </Td>
               </Tr>
@@ -711,7 +713,9 @@ export const CheckListDetails = () => {
               <Tr>
                 <Td>Заполнение чек-листа завершено</Td>
                 <Td>
-                  {data?.endTimeAutoHh}:{data?.endTimeAutoMm}{' '}
+                  {(data?.endTimeAutoHh && data?.endTimeAutoHh.length < 2) ? "0" + data?.endTimeAutoHh : data?.endTimeAutoHh}
+                  {(data?.endTimeAutoHh && data?.endTimeAutoMm) ? ':' : '-'}
+                  {(data?.endTimeAutoMm && data?.endTimeAutoMm.length < 2) ? "0" + data?.endTimeAutoMm : data?.endTimeAutoMm}{' '}
                   {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
                 </Td>
               </Tr>

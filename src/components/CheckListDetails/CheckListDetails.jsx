@@ -143,8 +143,8 @@ export const CheckListDetails = () => {
     Физиологические параметры:
       Содержание сахара в крови: ${data?.bloodSugarLevel ? data?.bloodSugarLevel : ''} ммоль/л
       Температура тела: ${data?.bodyTemperature ? data?.bodyTemperature: ''} °C
-      Артериальное давление: ${data?.arterialPressureD ? data?.arterialPressureD : ''}/${
-      data?.arterialPressureS ? data?.arterialPressureS : ''
+      Артериальное давление: ${data?.arterialPressureS ? data?.arterialPressureS : ''}/${
+      data?.arterialPressureD ? data?.arterialPressureD : ''
     } мм. рт. ст.
       Масса тела пациента: ${data?.patientBodyWeight ? data?.patientBodyWeight : ''} кг
       Возраст пациента: ${data?.patientAge ? data?.patientAge : ''} лет
@@ -397,7 +397,7 @@ export const CheckListDetails = () => {
               >
                 <Td>Артериальное давление</Td>
                 <Td>
-                  {data?.arterialPressureS}<br/>{data?.arterialPressureD}
+                  {data?.arterialPressureS}/{data?.arterialPressureD}
                 </Td>
                 <Td>мм. рт. ст.</Td>
               </TrRed>

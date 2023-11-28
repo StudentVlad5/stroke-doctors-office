@@ -18,8 +18,8 @@ export const Header = () => {
             loading="lazy"
           />
         </Link>
-        <Headline>
-          Алгоритм оказания помощи при <span>инсульте в остром периоде</span>
+        <Headline>SOS Emergency Connection
+          <p>Алгоритм оказания помощи при <span>инсульте в остром периоде</span></p>
         </Headline>
       </HeaderContainer>
     </HeaderSection>

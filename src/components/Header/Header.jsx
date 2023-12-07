@@ -19,7 +19,7 @@ export const Header = () => {
           />
         </Link>
         <Headline>SOS Emergency Connection
-          <p>Алгоритм оказания помощи при <span>инсульте в остром периоде</span></p>
+        <br/>Алгоритм оказания помощи при инсульте в остром периоде
         </Headline>
       </HeaderContainer>
     </HeaderSection>

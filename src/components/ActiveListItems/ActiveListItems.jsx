@@ -73,7 +73,7 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
                     <ItemInfo>
                       <p>Чек-лист №{item?.identifier}</p>
                       <p>от {moment(new Date(+item?.identifier)).format("DD/MM/YYYY")}</p>
-                      <br/>Бригада №{item?.application_number}
+                      <p><br/>Бригада №{item?.application_number}</p>
                       <p><br/>Время прибытия в больницу <br/>{(item?.deliveryTimeHh && item?.deliveryTimeHh.length < 2) ? "0" + item?.deliveryTimeHh : item?.deliveryTimeHh} : {(item?.deliveryTimeMm && item?.deliveryTimeMm.length < 2) ? "0" + item?.deliveryTimeMm : item?.deliveryTimeMm}</p>
                       <p><br/>Номер телефона: <br/>{item?.numberPhone}</p>
                       <BtnWrap>

@@ -20,8 +20,7 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
       (async function getData() {
         setIsLoading(true);
         try {
-          const { data } = await fetchData('read?identifier=*');
-          // &checkStatus="Активный"
+          const { data } = await fetchData('read?identifier=new');
           if (!data) {
             return onFetchError('Whoops, something went wrong');
           }

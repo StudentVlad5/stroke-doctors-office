@@ -53,7 +53,7 @@ export const ArchiveTable = () => {
     (async function getData() {
       setIsLoading(true);
       try {
-        const { data } = await fetchData('read?identifier=*');
+        const { data } = await fetchData('read?identifier=old');
         // // &checkStatus="Архивный"
         if (!data) {
           return onFetchError('Whoops, something went wrong');

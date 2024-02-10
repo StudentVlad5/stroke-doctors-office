@@ -1,6 +1,6 @@
-import 'modern-normalize';
-import { createGlobalStyle } from 'styled-components';
-import { theme } from './Variables.styled';
+import "modern-normalize";
+import { createGlobalStyle } from "styled-components";
+import { theme } from "./Variables.styled";
 
 export const GlobalStyle = createGlobalStyle`
   body { 
@@ -27,6 +27,18 @@ img {
   display:block;
   max-width: 100%;
   height: auto;
+}
+
+.table, tr, td {
+  border: none;
+  background-color: transparent;
+}
+
+.rowTable > td:last-child {
+  background-color: ${theme.colors.grey};
+}
+.rowTable {
+  border-right: none
 }
 
 // ----pagination----//

@@ -45,8 +45,10 @@ export const CheckListDetails = () => {
   const [data, setData] = useState([]);
   const [isCopied, setIsCopied] = useState(false);
   const [inputDataNumberHospital, setInputDataNumberHospital] = useState('');
-  const [inputDataHospitalizationTime, setInputDataHospitalizationTime] = useState('');
-  const [inputDataHospitalizationDate, setInputDataHospitalizationDate] = useState('');
+  const [inputDataHospitalizationTime, setInputDataHospitalizationTime] =
+    useState('');
+  const [inputDataHospitalizationDate, setInputDataHospitalizationDate] =
+    useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const routerParams = useParams();
@@ -66,14 +68,20 @@ export const CheckListDetails = () => {
     (async function getData() {
       setIsLoading(true);
       try {
-        const { data } = await fetchData(`read?identifier=${id}`); 
+        const { data } = await fetchData(`read?identifier=${id}`);
         if (!data) {
           return onFetchError('Whoops, something went wrong');
         }
         setData(data.normal);
-        if(data.normal?.numberHospital){setInputDataNumberHospital(data.normal?.numberHospital)};
-        if(data.normal?.hospitalizationTime){setInputDataHospitalizationTime(data.normal?.hospitalizationTime)};
-        if(data.normal?.hospitalizationDate){setInputDataHospitalizationDate(data.normal?.hospitalizationDate)};
+        if (data.normal?.numberHospital) {
+          setInputDataNumberHospital(data.normal?.numberHospital);
+        }
+        if (data.normal?.hospitalizationTime) {
+          setInputDataHospitalizationTime(data.normal?.hospitalizationTime);
+        }
+        if (data.normal?.hospitalizationDate) {
+          setInputDataHospitalizationDate(data.normal?.hospitalizationDate);
+        }
       } catch (error) {
         setError(error);
       } finally {
@@ -108,17 +116,24 @@ export const CheckListDetails = () => {
   const handleCopy = () => {
     const patientData = `
     Чек-лист №${data?.identifier ? data?.identifier : ''}
-    от ${data?.identifier ? moment(new Date(+data?.identifier)).format('DD/MM/YYYY') : ''}
-    Бригада ${data?.application_number ? data?.application_number : ''}
-    Предполагаемое время прибытия в больницу: ${data?.deliveryTimeHh? data?.deliveryTimeHh : ''}:${ data?.deliveryTimeMm ? data?.deliveryTimeMm : ''
+    от ${
+      data?.identifier
+        ? moment(new Date(+data?.identifier)).format('DD/MM/YYYY')
+        : ''
     }
+    Бригада ${data?.application_number ? data?.application_number : ''}
+    Предполагаемое время прибытия в больницу: ${
+      data?.deliveryTimeHh ? data?.deliveryTimeHh : ''
+    }:${data?.deliveryTimeMm ? data?.deliveryTimeMm : ''}
     Номер телефона: ${data?.numberPhone ? data?.numberPhone : ''}
 
     Личные данные пациента:
       ФИО пациента: ${data?.patientFullName ? data?.patientFullName : ''}
       ИИН пациента: ${data?.patientINN ? data?.patientINN : ''}
       Пол пациента: ${data?.patientSex ? data?.patientSex : ''}
-      Визуальное описание: ${data?.visualDescription ? data?.visualDescription : ''}
+      Визуальное описание: ${
+        data?.visualDescription ? data?.visualDescription : ''
+      }
 
     Методика F-A-S-T:
       Провисание на лице: ${
@@ -141,12 +156,16 @@ export const CheckListDetails = () => {
     } 
 
     Физиологические параметры:
-      Содержание сахара в крови: ${data?.bloodSugarLevel ? data?.bloodSugarLevel : ''} ммоль/л
-      Температура тела: ${data?.bodyTemperature ? data?.bodyTemperature: ''} °C
-      Артериальное давление: ${data?.arterialPressureS ? data?.arterialPressureS : ''}/${
-      data?.arterialPressureD ? data?.arterialPressureD : ''
-    } мм. рт. ст.
-      Масса тела пациента: ${data?.patientBodyWeight ? data?.patientBodyWeight : ''} кг
+      Содержание сахара в крови: ${
+        data?.bloodSugarLevel ? data?.bloodSugarLevel : ''
+      } ммоль/л
+      Температура тела: ${data?.bodyTemperature ? data?.bodyTemperature : ''} °C
+      Артериальное давление: ${
+        data?.arterialPressureS ? data?.arterialPressureS : ''
+      }/${data?.arterialPressureD ? data?.arterialPressureD : ''} мм. рт. ст.
+      Масса тела пациента: ${
+        data?.patientBodyWeight ? data?.patientBodyWeight : ''
+      } кг
       Возраст пациента: ${data?.patientAge ? data?.patientAge : ''} лет
 
     Анамнез:
@@ -231,14 +250,22 @@ export const CheckListDetails = () => {
        }
 
     Данные по заполнителю:
-      ФИО сотрудника: ${data?.medicalStaffFullName ? data?.medicalStaffFullName : ''}
-      № бригады СМП: №${data?.application_number ? data?.application_number : ''}
-      Заполнение чек-листа начато: ${data?.startTimeAutoHh ? data?.startTimeAutoHh : ' '}:${
-      data?.startTimeAutoMm ? data?.startTimeAutoMm : ' '
-    } ${moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
-      Заполнение чек-листа завершено:${data?.endTimeAutoHh ? data?.endTimeAutoHh : ' '}:${
-      data?.endTimeAutoMm ? data?.endTimeAutoMm : ' '
-    } ${moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
+      ФИО сотрудника: ${
+        data?.medicalStaffFullName ? data?.medicalStaffFullName : ''
+      }
+      № бригады СМП: №${
+        data?.application_number ? data?.application_number : ''
+      }
+      Заполнение чек-листа начато: ${
+        data?.startTimeAutoHh ? data?.startTimeAutoHh : ' '
+      }:${data?.startTimeAutoMm ? data?.startTimeAutoMm : ' '} ${moment(
+      new Date(+data?.identifier)
+    ).format('DD.MM.YYYY')}
+      Заполнение чек-листа завершено:${
+        data?.endTimeAutoHh ? data?.endTimeAutoHh : ' '
+      }:${data?.endTimeAutoMm ? data?.endTimeAutoMm : ' '} ${moment(
+      new Date(+data?.identifier)
+    ).format('DD.MM.YYYY')}
 
     Дополнительная информация от инсультного центра:
       Поликлиника прикрепления пациента: ${data?.numberHospital || ''}
@@ -377,7 +404,9 @@ export const CheckListDetails = () => {
               </TrRed>
               <TrRed
                 $props={
-                  Number(data?.bodyTemperature) < checkData.bodyTemperatureMin || Number(data?.bodyTemperature) > checkData.bodyTemperatureMax
+                  Number(data?.bodyTemperature) <
+                    checkData.bodyTemperatureMin ||
+                  Number(data?.bodyTemperature) > checkData.bodyTemperatureMax
                     ? theme.colors.accentCoral
                     : theme.colors.darkGrey
                 }
@@ -694,18 +723,26 @@ export const CheckListDetails = () => {
             <tbody>
               <Tr>
                 <Td>ФИО сотрудника</Td>
-                <Td>{data?.medicalStaffFullName ? data?.medicalStaffFullName : ''}</Td>
+                <Td>
+                  {data?.medicalStaffFullName ? data?.medicalStaffFullName : ''}
+                </Td>
               </Tr>
               <Tr>
                 <Td>№ бригады СМП</Td>
-                <Td>№{data?.application_number ? data?.application_number: ''}</Td>
+                <Td>
+                  №{data?.application_number ? data?.application_number : ''}
+                </Td>
               </Tr>
               <Tr>
                 <Td>Заполнение чек-листа начато</Td>
                 <Td>
-                  {(data?.startTimeAutoHh && data?.startTimeAutoHh.length < 2) ? "0" + data?.startTimeAutoHh : data?.startTimeAutoHh}
-                  {(data?.startTimeAutoHh && data?.startTimeAutoMm) ? ':' : '-'}
-                  {(data?.startTimeAutoMm && data?.startTimeAutoMm.length < 2) ? "0" + data?.startTimeAutoMm : data?.startTimeAutoMm}{' '}
+                  {data?.startTimeAutoHh && data?.startTimeAutoHh.length < 2
+                    ? '0' + data?.startTimeAutoHh
+                    : data?.startTimeAutoHh}
+                  {data?.startTimeAutoHh && data?.startTimeAutoMm ? ':' : '-'}
+                  {data?.startTimeAutoMm && data?.startTimeAutoMm.length < 2
+                    ? '0' + data?.startTimeAutoMm
+                    : data?.startTimeAutoMm}{' '}
                   {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
                 </Td>
               </Tr>
@@ -713,9 +750,13 @@ export const CheckListDetails = () => {
               <Tr>
                 <Td>Заполнение чек-листа завершено</Td>
                 <Td>
-                  {(data?.endTimeAutoHh && data?.endTimeAutoHh.length < 2) ? "0" + data?.endTimeAutoHh : data?.endTimeAutoHh}
-                  {(data?.endTimeAutoHh && data?.endTimeAutoMm) ? ':' : '-'}
-                  {(data?.endTimeAutoMm && data?.endTimeAutoMm.length < 2) ? "0" + data?.endTimeAutoMm : data?.endTimeAutoMm}{' '}
+                  {data?.endTimeAutoHh && data?.endTimeAutoHh.length < 2
+                    ? '0' + data?.endTimeAutoHh
+                    : data?.endTimeAutoHh}
+                  {data?.endTimeAutoHh && data?.endTimeAutoMm ? ':' : '-'}
+                  {data?.endTimeAutoMm && data?.endTimeAutoMm.length < 2
+                    ? '0' + data?.endTimeAutoMm
+                    : data?.endTimeAutoMm}{' '}
                   {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
                 </Td>
               </Tr>
@@ -736,8 +777,7 @@ export const CheckListDetails = () => {
               <AdditionalInfoFormInput
                 type="text"
                 value={inputDataNumberHospital}
-                onChange={e =>
-                  setInputDataNumberHospital(e.target.value)}
+                onChange={e => setInputDataNumberHospital(e.target.value)}
               />
             </AdditionalInfoFormLable>
 
@@ -750,19 +790,29 @@ export const CheckListDetails = () => {
                   <AdditionalInfoDataInput
                     type="time"
                     value={inputDataHospitalizationTime}
-                    onChange={e =>setInputDataHospitalizationTime(e.target.value)}
+                    onChange={e =>
+                      setInputDataHospitalizationTime(e.target.value)
+                    }
                   />
                 </AdditionalInfoDataLable>
                 <AdditionalInfoDataLable2>
                   <AdditionalInfoDataInput2
                     type="date"
                     value={inputDataHospitalizationDate}
-                    onChange={e =>setInputDataHospitalizationDate(e.target.value)}
+                    onChange={e =>
+                      setInputDataHospitalizationDate(e.target.value)
+                    }
                   />
                 </AdditionalInfoDataLable2>
               </AdditionalInfoDataLableBox>
             </AdditionalInfoDataBox>
 
+            <div>
+              <PatientBoxTitle>
+                Дополнительная информация от инсультного центра
+              </PatientBoxTitle>
+            </div>
+            
             <AdditionalInfoBtnBox>
               <AdditionalInfoBtn type="submit" onClick={handleSubmit}>
                 Сохранить чек-лист

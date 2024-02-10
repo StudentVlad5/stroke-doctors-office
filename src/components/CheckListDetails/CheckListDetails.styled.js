@@ -180,11 +180,7 @@ export const Table = styled.table`
 
 export const Tr = styled.tr`
   /* border: 1px solid ${theme.colors.black}; */
-  background-color: ${theme.colors.darkGrey};
-`;
-
-export const TrRed = styled(Tr)`
-  background-color: ${(props) => props.$props};
+  /* background-color: ${theme.colors.darkGrey}; */
 `;
 
 export const Td = styled.td`
@@ -208,8 +204,12 @@ export const Td = styled.td`
   }
 `;
 
+export const TdRed = styled(Td)`
+  background-color: ${(props) => props.$props};
+`;
+
 export const TdSmall = styled.td`
-  border-right: 1px solid ${theme.colors.black};
+  border: 1px solid ${theme.colors.black};
   padding: 12px 10px 12px 25px;
   height: 75px;
 
@@ -220,6 +220,9 @@ export const TdSmall = styled.td`
     font-size: 28px;
   }
 `;
+export const TdSmallRed = styled(TdSmall)`
+  background-color: ${(props) => props.$props};
+`
 
 export const TdCheckCorrectItem = styled.td`
   display: flex;
@@ -387,6 +390,7 @@ export const CheckBoxItem = styled.input`
   width: 100%;
   height: 100%;
   cursor: pointer;
+  user-select: none;
 `;
 export const StylesCheckBoxItem = styled.div`
   display: flex;
@@ -394,10 +398,15 @@ export const StylesCheckBoxItem = styled.div`
   align-items: center;
   width: 52px;
   height: 52px;
-  border: 1px solid ${theme.colors.black};
+  border: ${props=>props.$props} solid ${theme.colors.black};
   border-radius: 11px;
+  background-color: ${theme.colors.white};
   cursor: pointer;
 `;
 export const CheckIcon = styled(checkIcon)`
-  /* fill: ${(props) => props.$props}; */
+  fill: #BE0B00;
+  width: 36px;
+  height: 36px;
+  opacity: ${props=>props.$props};
+  user-select: none;
 `;

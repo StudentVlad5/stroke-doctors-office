@@ -74,6 +74,9 @@ export const CheckListDetails = () => {
     patientAgeMax: 80,
   };
 
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+
  // контролированный чекбокс по параметрам
  const [patientFullName_defect, setPatientFullName_defect] = useState(false);
  const [patientINN_defect, setPatientINN_defect] = useState(false);
@@ -117,34 +120,34 @@ export const CheckListDetails = () => {
         if(data.normal?.numberHospital){setInputDataNumberHospital(data.normal?.numberHospital)};
         if(data.normal?.hospitalizationTime){setInputDataHospitalizationTime(data.normal?.hospitalizationTime)};
         if(data.normal?.hospitalizationDate){setInputDataHospitalizationDate(data.normal?.hospitalizationDate)};
-        if(data.normal?.patientFullName_defect){setPatientFullName_defect(data.normal?.patientFullName_defect)};
-        if(data.normal?.patientINN_defect){setPatientINN_defect(data.normal?.patientINN_defect)};
-        if(data.normal?.patientSex_defect){setPatientSex_defect(data.normal?.patientSex_defect)};
-        if(data.normal?.visualDescription_defect){setVisualDescription_defect(data.normal?.visualDescription_defect)};
-        if(data.normal?.saggingFace_defect){setSaggingFace_defect(data.normal?.saggingFace_defect)};
-        if(data.normal?.handDisplacement_defect){setHandDisplacement_defect(data.normal?.handDisplacement_defect)};
-        if(data.normal?.speechDisorders_defect){setSpeechDisorders_defect(data.normal?.speechDisorders_defect)};
-        if(data.normal?.firstSymptomsTime_defect){setFirstSymptomsTime_defect(data.normal?.firstSymptomsTime_defect)};
-        if(data.normal?.bloodSugarLevel_defect){setBloodSugarLevel_defect(data.normal?.bloodSugarLevel_defect)};
-        if(data.normal?.bodyTemperature_defect){setBodyTemperature_defect(data.normal?.bodyTemperature_defect)};
-        if(data.normal?.arterialPressure_defect){setArterialPressure_defect(data.normal?.arterialPressure_defect)};
-        if(data.normal?.patientBodyWeight_defect){setPatientBodyWeight_defect(data.normal?.patientBodyWeight_defect)};
-        if(data.normal?.patientAge_defect){setPatientAge_defect(data.normal?.patientAge_defect)};
-        if(data.normal?.intracranialHemorrhages_defect){setIntracranialHemorrhages_defect(data.normal?.intracranialHemorrhages_defect)};
-        if(data.normal?.majorSurgeriesOrSevereInjuries_defect){setMajorSurgeriesOrSevereInjuries_defect(data.normal?.majorSurgeriesOrSevereInjuries_defect)};
-        if(data.normal?.surgicalInterventions_defect){setSurgicalInterventions_defect(data.normal?.surgicalInterventions_defect)};
-        if(data.normal?.myocardialInfarction_defect){setMyocardialInfarction_defect(data.normal?.myocardialInfarction_defect)};
-        if(data.normal?.stroke_defect){setStroke_defect(data.normal?.stroke_defect)};
-        if(data.normal?.arterialPuncture_defect){setArterialPuncture_defect(data.normal?.arterialPuncture_defect)};
-        if(data.normal?.smallOperations_defect){setSmallOperations_defect(data.normal?.smallOperations_defect)};
-        if(data.normal?.cardiovascularDiseases_defect){setCardiovascularDiseases_defect(data.normal?.cardiovascularDiseases_defect)};
-        if(data.normal?.acuteInfectiousDisease_defect){setAcuteInfectiousDisease_defect(data.normal?.acuteInfectiousDisease_defect)};
-        if(data.normal?.hemorrhagicStroke_defect){setHemorrhagicStroke_defect(data.normal?.hemorrhagicStroke_defect)};
-        if(data.normal?.convulsions_defect){setConvulsions_defect(data.normal?.convulsions_defect)};
-        if(data.normal?.onmk_defect){setOnmk_defect(data.normal?.onmk_defect)};
-        if(data.normal?.hemorrhages_defect){setHemorrhages_defect(data.normal?.hemorrhages_defect)};
-        if(data.normal?.SACStroke_defect){setSACStroke_defect(data.normal?.SACStroke_defect)};
-        if(data.normal?.ischemicStroke_defect){setIschemicStroke_defect(data.normal?.ischemicStroke_defect)};
+        if(data.normal?.patientFullName_defect){setPatientFullName_defect(JSON.parse(data.normal?.patientFullName_defect))};
+        if(data.normal?.patientINN_defect){setPatientINN_defect(JSON.parse(data.normal?.patientINN_defect))};
+        if(data.normal?.patientSex_defect){setPatientSex_defect(JSON.parse(data.normal?.patientSex_defect))};
+        if(data.normal?.visualDescription_defect){setVisualDescription_defect(JSON.parse(data.normal?.visualDescription_defect))};
+        if(data.normal?.saggingFace_defect){setSaggingFace_defect(JSON.parse(data.normal?.saggingFace_defect))};
+        if(data.normal?.handDisplacement_defect){setHandDisplacement_defect(JSON.parse(data.normal?.handDisplacement_defect))};
+        if(data.normal?.speechDisorders_defect){setSpeechDisorders_defect(JSON.parse(data.normal?.speechDisorders_defect))};
+        if(data.normal?.firstSymptomsTime_defect){setFirstSymptomsTime_defect(JSON.parse(data.normal?.firstSymptomsTime_defect))};
+        if(data.normal?.bloodSugarLevel_defect){setBloodSugarLevel_defect(JSON.parse(data.normal?.bloodSugarLevel_defect))};
+        if(data.normal?.bodyTemperature_defect){setBodyTemperature_defect(JSON.parse(data.normal?.bodyTemperature_defect))};
+        if(data.normal?.arterialPressure_defect){setArterialPressure_defect(JSON.parse(data.normal?.arterialPressure_defect))};
+        if(data.normal?.patientBodyWeight_defect){setPatientBodyWeight_defect(JSON.parse(data.normal?.patientBodyWeight_defect))};
+        if(data.normal?.patientAge_defect){setPatientAge_defect(JSON.parse(data.normal?.patientAge_defect))};
+        if(data.normal?.intracranialHemorrhages_defect){setIntracranialHemorrhages_defect(JSON.parse(data.normal?.intracranialHemorrhages_defect))};
+        if(data.normal?.majorSurgeriesOrSevereInjuries_defect){setMajorSurgeriesOrSevereInjuries_defect(JSON.parse(data.normal?.majorSurgeriesOrSevereInjuries_defect))};
+        if(data.normal?.surgicalInterventions_defect){setSurgicalInterventions_defect(JSON.parse(data.normal?.surgicalInterventions_defect))};
+        if(data.normal?.myocardialInfarction_defect){setMyocardialInfarction_defect(JSON.parse(data.normal?.myocardialInfarction_defect))};
+        if(data.normal?.stroke_defect){setStroke_defect(JSON.parse(data.normal?.stroke_defect))};
+        if(data.normal?.arterialPuncture_defect){setArterialPuncture_defect(JSON.parse(data.normal?.arterialPuncture_defect))};
+        if(data.normal?.smallOperations_defect){setSmallOperations_defect(JSON.parse(data.normal?.smallOperations_defect))};
+        if(data.normal?.cardiovascularDiseases_defect){setCardiovascularDiseases_defect(JSON.parse(data.normal?.cardiovascularDiseases_defect))};
+        if(data.normal?.acuteInfectiousDisease_defect){setAcuteInfectiousDisease_defect(JSON.parse(data.normal?.acuteInfectiousDisease_defect))};
+        if(data.normal?.hemorrhagicStroke_defect){setHemorrhagicStroke_defect(JSON.parse(data.normal?.hemorrhagicStroke_defect))};
+        if(data.normal?.convulsions_defect){setConvulsions_defect(JSON.parse(data.normal?.convulsions_defect))};
+        if(data.normal?.onmk_defect){setOnmk_defect(JSON.parse(data.normal?.onmk_defect))};
+        if(data.normal?.hemorrhages_defect){setHemorrhages_defect(JSON.parse(data.normal?.hemorrhages_defect))};
+        if(data.normal?.SACStroke_defect){setSACStroke_defect(JSON.parse(data.normal?.SACStroke_defect))};
+        if(data.normal?.ischemicStroke_defect){setIschemicStroke_defect(JSON.parse(data.normal?.ischemicStroke_defect))};
       } catch (error) {
         setError(error);
       } finally {
@@ -529,6 +532,56 @@ export const CheckListDetails = () => {
                 <Td>
                   {data?.firstSymptomsTimeHh}:{data?.firstSymptomsTimeMm}
                 </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="firstSymptomsTime_defect" name="firstSymptomsTime_defect" value={firstSymptomsTime_defect}
+                    onChange={()=>setFirstSymptomsTime_defect(!firstSymptomsTime_defect)} checked={firstSymptomsTime_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={firstSymptomsTime_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={firstSymptomsTime_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
+              </Tr>
+            </tbody>
+          </Table>
+
+          <PatientBoxTitle>Действия при подозрении на инсульт</PatientBoxTitle>
+          <Table>
+            <tbody>
+              <Tr>
+                <Td>Начата процедура лечения инсульта</Td>
+                <Td>
+                  {data?.saggingFace && data?.saggingFace.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Установлен внутривенный доступ</Td>
+                <Td>
+                  {data?.handDisplacement &&
+                  data?.handDisplacement.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Пациент принимает антикоагулянты</Td>
+                <Td>
+                  {data?.speechDisorders &&
+                  data?.speechDisorders.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>У пациента снято ЭКГ</Td>
+                <Td>
+                  {data?.firstSymptomsTimeHh}:{data?.firstSymptomsTimeMm}
+                </Td>
+              </Tr>
+            </tbody>
+          </Table>
 
           <PatientBoxTitle>Физиологические параметры</PatientBoxTitle>
           <Table>
@@ -1299,7 +1352,7 @@ export const CheckListDetails = () => {
                 <DecisionBoxInput
                   type="checkbox"
                   checked={isChecked1}
-                  onChange={() => handleCheckboxChange(1)}
+                  onChange={() => setIsChecked1(!isChecked1)}
                 />
               </DecisionBoxLabel>
 
@@ -1310,7 +1363,7 @@ export const CheckListDetails = () => {
                 <DecisionBoxInput
                   type="checkbox"
                   checked={isChecked2}
-                  onChange={() => handleCheckboxChange(2)}
+                  onChange={() => setIsChecked2(!isChecked2)}
                 />
               </DecisionBoxLabel>
 

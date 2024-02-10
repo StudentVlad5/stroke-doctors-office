@@ -106,6 +106,11 @@ export const CheckListDetails = () => {
  const [hemorrhages_defect, setHemorrhages_defect] = useState(false);
  const [SACStroke_defect, setSACStroke_defect] = useState(false);
  const [ischemicStroke_defect, setIschemicStroke_defect] = useState(false);
+ const [beginStrokeTreatment_defect, setBeginStrokeTreatment_defect] = useState(false);
+ const [intravenousAccess_defect, setIntravenousAccess_defect] = useState(false);
+ const [patientTakingAnticoagulants_defect, setPatientTakingAnticoagulants_defect] = useState(false);
+ const [ecgTaken_defect, setEcgTaken_defect] = useState(false);
+
 
 
   useEffect(() => {
@@ -148,6 +153,10 @@ export const CheckListDetails = () => {
         if(data.normal?.hemorrhages_defect){setHemorrhages_defect(JSON.parse(data.normal?.hemorrhages_defect))};
         if(data.normal?.SACStroke_defect){setSACStroke_defect(JSON.parse(data.normal?.SACStroke_defect))};
         if(data.normal?.ischemicStroke_defect){setIschemicStroke_defect(JSON.parse(data.normal?.ischemicStroke_defect))};
+        if(data.normal?.beginStrokeTreatment_defect){setBeginStrokeTreatment_defect(JSON.parse(data.normal?.beginStrokeTreatment_defect))};
+        if(data.normal?.intravenousAccess_defect){setIntravenousAccess_defect(JSON.parse(data.normal?.intravenousAccess_defect))};
+        if(data.normal?.patientTakingAnticoagulants_defect){setPatientTakingAnticoagulants_defect(JSON.parse(data.normal?.patientTakingAnticoagulants_defect))};
+        if(data.normal?.ecgTaken_defect){setEcgTaken_defect(JSON.parse(data.normal?.ecgTaken_defect))};
       } catch (error) {
         setError(error);
       } finally {
@@ -172,7 +181,7 @@ export const CheckListDetails = () => {
         &hospitalizationTime=${inputDataHospitalizationTime}&hospitalizationDate=${inputDataHospitalizationDate}&patientFullName_defect=${patientFullName_defect}&patientINN_defect=${patientINN_defect}&patientSex_defect=${patientSex_defect}
         &visualDescription_defect=${visualDescription_defect}&saggingFace_defect=${saggingFace_defect}&handDisplacement_defect=${handDisplacement_defect}&speechDisorders_defect=${speechDisorders_defect}&firstSymptomsTime_defect=${firstSymptomsTime_defect}&bloodSugarLevel_defect=${bloodSugarLevel_defect}&bodyTemperature_defect=${bodyTemperature_defect}&arterialPressure_defect=${arterialPressure_defect}&patientBodyWeight_defect=${patientBodyWeight_defect}&patientAge_defect=${patientAge_defect}&intracranialHemorrhages_defect=${intracranialHemorrhages_defect}&majorSurgeriesOrSevereInjuries_defect=${majorSurgeriesOrSevereInjuries_defect}&surgicalInterventions_defect=${surgicalInterventions_defect}&myocardialInfarction_defect=${myocardialInfarction_defect}&stroke_defect=${stroke_defect}
         &arterialPuncture_defect=${arterialPuncture_defect}&smallOperations_defect=${smallOperations_defect}&cardiovascularDiseases_defect=${cardiovascularDiseases_defect}&acuteInfectiousDisease_defect=${acuteInfectiousDisease_defect}&hemorrhagicStroke_defect=${hemorrhagicStroke_defect}&convulsions_defect=${convulsions_defect}&onmk_defect=${onmk_defect}
-        &hemorrhages_defect=${hemorrhages_defect}&SACStroke_defect=${SACStroke_defect}&ischemicStroke_defect=${ischemicStroke_defect}`
+        &hemorrhages_defect=${hemorrhages_defect}&SACStroke_defect=${SACStroke_defect}&ischemicStroke_defect=${ischemicStroke_defect}&beginStrokeTreatment_defect=${beginStrokeTreatment_defect}&intravenousAccess_defect=${intravenousAccess_defect}&patientTakingAnticoagulants_defect=${patientTakingAnticoagulants_defect}&ecgTaken_defect=${ecgTaken_defect}`
       );
       if (!res) {
         return onFetchError('Whoops, something went wrong');
@@ -551,34 +560,70 @@ export const CheckListDetails = () => {
               <Tr>
                 <Td>Начата процедура лечения инсульта</Td>
                 <Td>
-                  {data?.saggingFace && data?.saggingFace.toString() === 'true'
+                  {data?.beginStrokeTreatment && data?.beginStrokeTreatment.toString() === 'true'
                     ? 'Да'
                     : '-'}
                 </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="beginStrokeTreatment_defect" name="beginStrokeTreatment_defect" value={beginStrokeTreatment_defect}
+                    onChange={()=>setBeginStrokeTreatment_defect(!beginStrokeTreatment_defect)} checked={beginStrokeTreatment_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={beginStrokeTreatment_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={beginStrokeTreatment_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
               </Tr>
               <Tr>
                 <Td>Установлен внутривенный доступ</Td>
                 <Td>
-                  {data?.handDisplacement &&
-                  data?.handDisplacement.toString() === 'true'
+                  {data?.intravenousAccess &&
+                  data?.intravenousAccess.toString() === 'true'
                     ? 'Да'
                     : '-'}
                 </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="intravenousAccess_defect" name="intravenousAccess_defect" value={intravenousAccess_defect}
+                    onChange={()=>setIntravenousAccess_defect(!intravenousAccess_defect)} checked={intravenousAccess_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={intravenousAccess_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={intravenousAccess_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
               </Tr>
               <Tr>
                 <Td>Пациент принимает антикоагулянты</Td>
                 <Td>
-                  {data?.speechDisorders &&
-                  data?.speechDisorders.toString() === 'true'
+                  {data?.patientTakingAnticoagulants &&
+                  data?.patientTakingAnticoagulants.toString() === 'true'
                     ? 'Да'
                     : '-'}
                 </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="patientTakingAnticoagulants_defect" name="patientTakingAnticoagulants_defect" value={patientTakingAnticoagulants_defect}
+                    onChange={()=>setPatientTakingAnticoagulants_defect(!patientTakingAnticoagulants_defect)} checked={patientTakingAnticoagulants_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={patientTakingAnticoagulants_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={patientTakingAnticoagulants_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
               </Tr>
               <Tr>
                 <Td>У пациента снято ЭКГ</Td>
                 <Td>
-                  {data?.firstSymptomsTimeHh}:{data?.firstSymptomsTimeMm}
+                  {data?.ecgTakenHH}:{data?.ecgTakenMM}
                 </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="ecgTaken_defect" name="ecgTaken_defect" value={ecgTaken_defect}
+                    onChange={()=>setEcgTaken_defect(!ecgTaken_defect)} checked={ecgTaken_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={ecgTaken_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={ecgTaken_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
               </Tr>
             </tbody>
           </Table>

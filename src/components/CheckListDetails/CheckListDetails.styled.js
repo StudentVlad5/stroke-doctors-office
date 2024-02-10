@@ -196,6 +196,7 @@ export const Td = styled.td`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  background-color: ${theme.colors.darkGrey};
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 24px;
   }

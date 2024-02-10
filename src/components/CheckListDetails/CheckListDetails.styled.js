@@ -1,8 +1,9 @@
-import { theme } from 'components/baseStyles/Variables.styled';
-import styled from 'styled-components';
-import { ReactComponent as copyIcon } from 'images/svg/copy.svg';
-import { ReactComponent as wordIcon } from 'images/svg/word.svg';
-import { Link } from 'react-router-dom';
+import { theme } from "components/baseStyles/Variables.styled";
+import styled from "styled-components";
+import { ReactComponent as copyIcon } from "images/svg/copy.svg";
+import { ReactComponent as wordIcon } from "images/svg/word.svg";
+import {ReactComponent as checkIcon} from "images/svg/check.svg";
+import { Link } from "react-router-dom";
 
 export const CheckListBox = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ export const CheckListBox = styled.div`
   }
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     border-bottom: 3px solid ${theme.colors.black};
     bottom: 50px;
@@ -178,17 +179,18 @@ export const Table = styled.table`
 `;
 
 export const Tr = styled.tr`
-  border: 1px solid ${theme.colors.black};
+  /* border: 1px solid ${theme.colors.black}; */
   background-color: ${theme.colors.darkGrey};
 `;
 
 export const TrRed = styled(Tr)`
-  background-color: ${props => props.$props};
+  background-color: ${(props) => props.$props};
 `;
 
 export const Td = styled.td`
   border-right: 1px solid ${theme.colors.black};
   padding: 12px 10px 12px 25px;
+  border: 1px solid ${theme.colors.black};
 
   width: 700px;
   height: 75px;
@@ -211,18 +213,22 @@ export const TdSmall = styled.td`
   padding: 12px 10px 12px 25px;
   height: 75px;
 
-  color: ${theme.colors.black};
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-
   @media screen and (min-width: ${theme.breakpoints.tablet}) {
     font-size: 24px;
   }
   @media screen and (min-width: ${theme.breakpoints.desktop}) {
     font-size: 28px;
   }
+`;
+
+export const TdCheckCorrectItem = styled.td`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  padding: 11px 20px;
+  height: 75px;
+  border: none;
 `;
 
 export const AdditionalInfoBox = styled.div``;
@@ -359,8 +365,8 @@ export const AdditionalInfoBtn = styled.button`
   line-height: normal;
   cursor: pointer;
 
-  @media screen and (min-width: ${theme.breakpoints.tablet}){
-  font-size: 25px; 
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 25px;
   }
   @media screen and (min-width: 1022px) {
     font-size: 32px;
@@ -371,4 +377,27 @@ export const AdditionalInfoBtn = styled.button`
   &:focus {
     background: ${theme.colors.lightGreen};
   }
+`;
+export const CheckBoxItem = styled.input`
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+`;
+export const StylesCheckBoxItem = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid ${theme.colors.black};
+  border-radius: 11px;
+  cursor: pointer;
+`;
+export const CheckIcon = styled(checkIcon)`
+  /* fill: ${(props) => props.$props}; */
 `;

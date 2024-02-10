@@ -808,11 +808,29 @@ export const CheckListDetails = () => {
             </AdditionalInfoDataBox>
 
             <div>
-              <PatientBoxTitle>
-                Дополнительная информация от инсультного центра
-              </PatientBoxTitle>
+              <PatientBoxTitle>Заключительное решение</PatientBoxTitle>
+              <AdditionalInfoDataLable>
+                <AdditionalInfoFormText>
+                  Госпитализация в Инсультный центр
+                </AdditionalInfoFormText>
+                <input type="checkbox" name="" id="" />
+              </AdditionalInfoDataLable>
+
+              <AdditionalInfoDataLable>
+                <AdditionalInfoFormText>
+                  Направление на амбулаторное лечение
+                </AdditionalInfoFormText>
+                <input type="checkbox" name="" id="" />
+              </AdditionalInfoDataLable>
+
+              <AdditionalInfoDataLable>
+                <AdditionalInfoFormText>
+                  Госпитализация в другое отделение
+                </AdditionalInfoFormText>
+                <input type="text" name="" id="" />
+              </AdditionalInfoDataLable>
             </div>
-            
+
             <AdditionalInfoBtnBox>
               <AdditionalInfoBtn type="submit" onClick={handleSubmit}>
                 Сохранить чек-лист

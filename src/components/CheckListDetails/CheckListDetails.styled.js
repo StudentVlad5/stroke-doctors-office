@@ -1,9 +1,9 @@
-import { theme } from "components/baseStyles/Variables.styled";
-import styled from "styled-components";
-import { ReactComponent as copyIcon } from "images/svg/copy.svg";
-import { ReactComponent as wordIcon } from "images/svg/word.svg";
-import {ReactComponent as checkIcon} from "images/svg/check.svg";
-import { Link } from "react-router-dom";
+import { theme } from 'components/baseStyles/Variables.styled';
+import styled from 'styled-components';
+import { ReactComponent as copyIcon } from 'images/svg/copy.svg';
+import { ReactComponent as wordIcon } from 'images/svg/word.svg';
+import { ReactComponent as checkIcon } from 'images/svg/check.svg';
+import { Link } from 'react-router-dom';
 
 export const CheckListBox = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ export const CheckListBox = styled.div`
   }
 
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     border-bottom: 3px solid ${theme.colors.black};
     bottom: 50px;
@@ -184,7 +184,7 @@ export const Tr = styled.tr`
 `;
 
 export const TrRed = styled(Tr)`
-  background-color: ${(props) => props.$props};
+  background-color: ${props => props.$props};
 `;
 
 export const Td = styled.td`
@@ -399,5 +399,64 @@ export const StylesCheckBoxItem = styled.div`
   cursor: pointer;
 `;
 export const CheckIcon = styled(checkIcon)`
-  /* fill: ${(props) => props.$props}; */
+  /* fill: ${props => props.$props}; */
 `;
+
+export const DecisionBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-top: 75px;
+`;
+
+export const DecisionBoxLabel = styled.label`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+`;
+
+export const DecisionBoxInput = styled.input`
+  position: absolute;
+  left: 833px;
+  width: 52px;
+  height: 52px;
+  border-radius: 11px;
+  cursor: pointer;
+  border-color: #7a7a7a;
+`;
+
+export const DecisionBoxTextareaLabel = styled.label`
+  margin-top: 40px;
+`;
+
+export const DecisionBoxTextarea = styled.textarea`
+  width: 100%;
+  height: 206px;
+  border-radius: 11px;
+  padding: 25px 27px;
+
+  color: ${theme.colors.black};
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 28px;
+  }
+`;
+
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;
+// export const DecisionBox = styled.div``;

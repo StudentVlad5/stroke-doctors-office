@@ -38,6 +38,12 @@ import {
   CheckBoxItem,
   StylesCheckBoxItem,
   CheckIcon,
+  DecisionBox,
+  DecisionBoxLabel,
+  DecisionBoxInput,
+  DecisionBoxTextarea,
+  // DecisionBoxInputText,
+  DecisionBoxTextareaLabel,
 } from './CheckListDetails.styled';
 import clipboardCopy from 'clipboard-copy';
 import { useParams } from 'react-router-dom';
@@ -70,7 +76,20 @@ export const CheckListDetails = () => {
 
   // контролированный чекбокс по параметрам
   const [checkPatientFullName, setCheckPatientFullName] = useState(false);
-console.log(checkPatientFullName);
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+
+  const handleCheckboxChange = checkboxNumber => {
+    if (checkboxNumber === 1) {
+      setIsChecked1(!isChecked1);
+      if (isChecked2) setIsChecked2(false);
+    } else if (checkboxNumber === 2) {
+      setIsChecked2(!isChecked2);
+      if (isChecked1) setIsChecked1(false);
+    }
+  };
+
+  // console.log(checkPatientFullName);
   useEffect(() => {
     (async function getData() {
       setIsLoading(true);
@@ -161,6 +180,12 @@ console.log(checkPatientFullName);
       Время появления первых симптомов: ${data?.firstSymptomsTimeHh}:${
       data?.firstSymptomsTimeMm
     } 
+
+    Действия при подозрении на инсульт:
+      Начата процедура лечения инсульта:
+      Установлен внутривенный доступ:
+      Пациент принимает антикоагулянты:
+      У пациента снято ЭКГ:
 
     Физиологические параметры:
       Содержание сахара в крови: ${
@@ -276,9 +301,19 @@ console.log(checkPatientFullName);
 
     Дополнительная информация от инсультного центра:
       Поликлиника прикрепления пациента: ${data?.numberHospital || ''}
+      Дата и время прибытия пациента:
+      Дата и время проведения КТ:
+      Дата и время проведения ТЛТ:
       Дата и время госпитализации: ${data?.hospitalizationTime || ''}  ${
       data?.hospitalizationDate || ''
     }
+
+      Заключительное решение:
+       Госпитализация в Инсультный центр:
+       Направление на амбулаторное лечение:
+       Госпитализация в другое отделение:
+       Примечание к чек-листу от Инсультного центра:
+
   `;
     clipboardCopy(patientData);
 
@@ -336,16 +371,24 @@ console.log(checkPatientFullName);
           <PatientBoxTitle>Личные данные пациента</PatientBoxTitle>
           <Table>
             <tbody>
-              <Tr className='rowTable'>
+              <Tr className="rowTable">
                 <Td>ФИО пациента</Td>
                 <Td>{data?.patientFullName}</Td>
                 <TdCheckCorrectItem>
                   <label>
-                    <CheckBoxItem type="checkbox" id="checkPatientFullName" name="checkPatientFullName" value={checkPatientFullName}
-                    onChange={()=>setCheckPatientFullName(!checkPatientFullName)} checked={checkPatientFullName}></CheckBoxItem>
+                    <CheckBoxItem
+                      type="checkbox"
+                      id="checkPatientFullName"
+                      name="checkPatientFullName"
+                      value={checkPatientFullName}
+                      onChange={() =>
+                        setCheckPatientFullName(!checkPatientFullName)
+                      }
+                      checked={checkPatientFullName}
+                    ></CheckBoxItem>
                   </label>
                   <StylesCheckBoxItem>
-                  <CheckIcon/>
+                    <CheckIcon />
                   </StylesCheckBoxItem>
                 </TdCheckCorrectItem>
               </Tr>
@@ -395,6 +438,44 @@ console.log(checkPatientFullName);
               </Tr>
               <Tr>
                 <Td>Время появления первых симптомов</Td>
+                <Td>
+                  {data?.firstSymptomsTimeHh}:{data?.firstSymptomsTimeMm}
+                </Td>
+              </Tr>
+            </tbody>
+          </Table>
+
+          <PatientBoxTitle>Действия при подозрении на инсульт</PatientBoxTitle>
+          <Table>
+            <tbody>
+              <Tr>
+                <Td>Начата процедура лечения инсульта</Td>
+                <Td>
+                  {data?.saggingFace && data?.saggingFace.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Установлен внутривенный доступ</Td>
+                <Td>
+                  {data?.handDisplacement &&
+                  data?.handDisplacement.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>Пациент принимает антикоагулянты</Td>
+                <Td>
+                  {data?.speechDisorders &&
+                  data?.speechDisorders.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+              </Tr>
+              <Tr>
+                <Td>У пациента снято ЭКГ</Td>
                 <Td>
                   {data?.firstSymptomsTimeHh}:{data?.firstSymptomsTimeMm}
                 </Td>
@@ -799,6 +880,84 @@ console.log(checkPatientFullName);
 
             <AdditionalInfoDataBox>
               <AdditionalInfoFormText>
+                Дата и время прибытия пациента
+              </AdditionalInfoFormText>
+              <AdditionalInfoDataLableBox>
+                <AdditionalInfoDataLable>
+                  <AdditionalInfoDataInput
+                    type="time"
+                    // value={inputDataHospitalizationTime}
+                    // onChange={e =>
+                    //   setInputDataHospitalizationTime(e.target.value)
+                    // }
+                  />
+                </AdditionalInfoDataLable>
+                <AdditionalInfoDataLable2>
+                  <AdditionalInfoDataInput2
+                    type="date"
+                    // value={inputDataHospitalizationDate}
+                    // onChange={e =>
+                    //   setInputDataHospitalizationDate(e.target.value)
+                    // }
+                  />
+                </AdditionalInfoDataLable2>
+              </AdditionalInfoDataLableBox>
+            </AdditionalInfoDataBox>
+
+            <AdditionalInfoDataBox>
+              <AdditionalInfoFormText>
+                Дата и время проведения КТ
+              </AdditionalInfoFormText>
+              <AdditionalInfoDataLableBox>
+                <AdditionalInfoDataLable>
+                  <AdditionalInfoDataInput
+                    type="time"
+                    // value={inputDataHospitalizationTime}
+                    // onChange={e =>
+                    //   setInputDataHospitalizationTime(e.target.value)
+                    // }
+                  />
+                </AdditionalInfoDataLable>
+                <AdditionalInfoDataLable2>
+                  <AdditionalInfoDataInput2
+                    type="date"
+                    // value={inputDataHospitalizationDate}
+                    // onChange={e =>
+                    //   setInputDataHospitalizationDate(e.target.value)
+                    // }
+                  />
+                </AdditionalInfoDataLable2>
+              </AdditionalInfoDataLableBox>
+            </AdditionalInfoDataBox>
+
+            <AdditionalInfoDataBox>
+              <AdditionalInfoFormText>
+                Дата и время проведения ТЛТ
+              </AdditionalInfoFormText>
+              <AdditionalInfoDataLableBox>
+                <AdditionalInfoDataLable>
+                  <AdditionalInfoDataInput
+                    type="time"
+                    // value={inputDataHospitalizationTime}
+                    // onChange={e =>
+                    //   setInputDataHospitalizationTime(e.target.value)
+                    // }
+                  />
+                </AdditionalInfoDataLable>
+                <AdditionalInfoDataLable2>
+                  <AdditionalInfoDataInput2
+                    type="date"
+                    // value={inputDataHospitalizationDate}
+                    // onChange={e =>
+                    //   setInputDataHospitalizationDate(e.target.value)
+                    // }
+                  />
+                </AdditionalInfoDataLable2>
+              </AdditionalInfoDataLableBox>
+            </AdditionalInfoDataBox>
+
+            <AdditionalInfoDataBox>
+              <AdditionalInfoFormText>
                 Дата и время госпитализации
               </AdditionalInfoFormText>
               <AdditionalInfoDataLableBox>
@@ -823,29 +982,45 @@ console.log(checkPatientFullName);
               </AdditionalInfoDataLableBox>
             </AdditionalInfoDataBox>
 
-            <div>
+            <DecisionBox>
               <PatientBoxTitle>Заключительное решение</PatientBoxTitle>
-              <AdditionalInfoDataLable>
+              <DecisionBoxLabel>
                 <AdditionalInfoFormText>
                   Госпитализация в Инсультный центр
                 </AdditionalInfoFormText>
-                <input type="checkbox" name="" id="" />
-              </AdditionalInfoDataLable>
+                <DecisionBoxInput
+                  type="checkbox"
+                  checked={isChecked1}
+                  onChange={() => handleCheckboxChange(1)}
+                />
+              </DecisionBoxLabel>
 
-              <AdditionalInfoDataLable>
+              <DecisionBoxLabel>
                 <AdditionalInfoFormText>
                   Направление на амбулаторное лечение
                 </AdditionalInfoFormText>
-                <input type="checkbox" name="" id="" />
-              </AdditionalInfoDataLable>
+                <DecisionBoxInput
+                  type="checkbox"
+                  checked={isChecked2}
+                  onChange={() => handleCheckboxChange(2)}
+                />
+              </DecisionBoxLabel>
 
-              <AdditionalInfoDataLable>
+              <DecisionBoxLabel>
                 <AdditionalInfoFormText>
                   Госпитализация в другое отделение
                 </AdditionalInfoFormText>
-                <input type="text" name="" id="" />
-              </AdditionalInfoDataLable>
-            </div>
+                <AdditionalInfoFormInput type="text" name="" id="" />
+              </DecisionBoxLabel>
+
+              <DecisionBoxTextareaLabel>
+                <AdditionalInfoFormText style={{ marginBottom: 12 }}>
+                  Примечание к чек-листу от Инсультного центра
+                </AdditionalInfoFormText>
+
+                <DecisionBoxTextarea name="" id=""></DecisionBoxTextarea>
+              </DecisionBoxTextareaLabel>
+            </DecisionBox>
 
             <AdditionalInfoBtnBox>
               <AdditionalInfoBtn type="submit" onClick={handleSubmit}>

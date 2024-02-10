@@ -30,10 +30,14 @@ import {
   Table,
   Td,
   TdSmall,
+  TdCheckCorrectItem,
   Tr,
   TrRed,
   Triangle,
   WordIcon,
+  CheckBoxItem,
+  StylesCheckBoxItem,
+  CheckIcon,
 } from './CheckListDetails.styled';
 import clipboardCopy from 'clipboard-copy';
 import { useParams } from 'react-router-dom';
@@ -62,6 +66,9 @@ export const CheckListDetails = () => {
     patientAgeMax: 80,
   };
 
+  // контролированный чекбокс по параметрам
+  const [checkPatientFullName, setCheckPatientFullName] = useState(false);
+console.log(checkPatientFullName);
   useEffect(() => {
     (async function getData() {
       setIsLoading(true);
@@ -302,9 +309,18 @@ export const CheckListDetails = () => {
           <PatientBoxTitle>Личные данные пациента</PatientBoxTitle>
           <Table>
             <tbody>
-              <Tr>
+              <Tr className='rowTable'>
                 <Td>ФИО пациента</Td>
                 <Td>{data?.patientFullName}</Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="checkPatientFullName" name="checkPatientFullName" value={checkPatientFullName}
+                    onChange={()=>setCheckPatientFullName(!checkPatientFullName)} checked={checkPatientFullName}></CheckBoxItem>
+                  </label>
+                  <StylesCheckBoxItem>
+                  <CheckIcon/>
+                  </StylesCheckBoxItem>
+                </TdCheckCorrectItem>
               </Tr>
               <Tr>
                 <Td>ИИН пациента</Td>

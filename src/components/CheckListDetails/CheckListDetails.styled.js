@@ -4,6 +4,7 @@ import { ReactComponent as copyIcon } from 'images/svg/copy.svg';
 import { ReactComponent as wordIcon } from 'images/svg/word.svg';
 import { ReactComponent as checkIcon } from 'images/svg/check.svg';
 import { Link } from 'react-router-dom';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 
 export const CheckListBox = styled.div`
   display: flex;
@@ -206,7 +207,7 @@ export const Td = styled.td`
 `;
 
 export const TdRed = styled(Td)`
-  background-color: ${(props) => props.$props};
+  background-color: ${props => props.$props};
 `;
 
 export const TdSmall = styled.td`
@@ -222,8 +223,8 @@ export const TdSmall = styled.td`
   }
 `;
 export const TdSmallRed = styled(TdSmall)`
-  background-color: ${(props) => props.$props};
-`
+  background-color: ${props => props.$props};
+`;
 
 export const TdCheckCorrectItem = styled.td`
   display: flex;
@@ -399,16 +400,16 @@ export const StylesCheckBoxItem = styled.div`
   align-items: center;
   width: 52px;
   height: 52px;
-  border: ${props=>props.$props} solid ${theme.colors.black};
+  border: ${props => props.$props} solid ${theme.colors.black};
   border-radius: 11px;
   background-color: ${theme.colors.white};
   cursor: pointer;
 `;
 export const CheckIcon = styled(checkIcon)`
-  fill: #BE0B00;
+  fill: #be0b00;
   width: 36px;
   height: 36px;
-  opacity: ${props=>props.$props};
+  opacity: ${props => props.$props};
   user-select: none;
 `;
 
@@ -458,9 +459,43 @@ export const DecisionBoxTextarea = styled.textarea`
   }
 `;
 
-// export const DecisionBox = styled.div``;
-// export const DecisionBox = styled.div``;
-// export const DecisionBox = styled.div``;
+export const TdCMP = styled.td`
+  position: relative;
+  padding: 12px 10px 12px 25px;
+  border: 1px solid ${theme.colors.black};
+
+  width: 100%;
+  height: 279px;
+
+  color: ${theme.colors.black};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: ${theme.colors.darkGrey};
+
+  @media screen and (min-width: ${theme.breakpoints.tablet}) {
+    font-size: 24px;
+  }
+
+  @media screen and (min-width: ${theme.breakpoints.desktop}) {
+    font-size: 28px;
+  }
+`;
+
+export const TdCMPSpan = styled.span`
+  position: absolute;
+  top: 12px;
+
+  &:last-child{
+    top: 70px;
+  }
+`;
+
+export const LocalizationProviderBox = styled(DemoContainer)`
+background-color: aqua;
+`;
+
 // export const DecisionBox = styled.div``;
 // export const DecisionBox = styled.div``;
 // export const DecisionBox = styled.div``;

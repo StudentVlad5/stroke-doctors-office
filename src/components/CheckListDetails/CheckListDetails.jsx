@@ -55,6 +55,9 @@ import { export2Docx } from 'services/exportToWord';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import dayjs from 'dayjs'
+import 'dayjs/locale/de'
+
 
 export const CheckListDetails = () => {
   const [data, setData] = useState([]);
@@ -366,7 +369,7 @@ export const CheckListDetails = () => {
           );
         }
         if (data.normal?.timeDateCt) {
-          setTimeDateCt(moment(data.normal?.timeDateCt));
+          setTimeDateCt(new Date(data.normal?.timeDateCt));
         }
         // if (data.normal?.hospitalizationDepartment) {
         //   setHospitalizationDepartment(hospitalizationDepartment);
@@ -635,7 +638,6 @@ export const CheckListDetails = () => {
     });
   };
 
-  console.log(timeDateCt);
   
   return (
     <Container>
@@ -2168,16 +2170,14 @@ export const CheckListDetails = () => {
                     //   setInputDataHospitalizationTime(e.target.value)
                     // }
                   /> */}
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
                     <DemoContainer components={['DateTimePicker']}>
                       <DateTimePicker
                         label="Введите время и дату"
                         ampm={false}
-                        format="YYYY-MM-DD HH:mm"
-                        value={timeDateCt}
-                        onChange={e => setTimeDateCt(e.target.value)}
-                        // value={selectedDateTime}
-                        // onChange={handleDateTimeChange}
+                        format="DD-MM-YYYY HH:mm"
+                        onChange={newValue => setTimeDateCt(newValue)}
+                        value={dayjs(new Date(timeDateCt)).locale('de')}
                       />
                     </DemoContainer>
                   </LocalizationProvider>

@@ -72,6 +72,8 @@ export const CheckListDetails = () => {
     arterialPressureD: 180,
     patientAgeMin: 17,
     patientAgeMax: 80,
+    firstSymptomsTimeMin: 270,
+    firstSymptomsTimeMax: 4320,
   };
 
   const [isChecked1, setIsChecked1] = useState(false);
@@ -110,8 +112,17 @@ export const CheckListDetails = () => {
  const [intravenousAccess_defect, setIntravenousAccess_defect] = useState(false);
  const [patientTakingAnticoagulants_defect, setPatientTakingAnticoagulants_defect] = useState(false);
  const [ecgTaken_defect, setEcgTaken_defect] = useState(false);
+ const [lossOfBalance_defect, setLossOfBalance_defect] = useState(false);
+ const [visionProblems_defect, setVisionProblems_defect] = useState(false);
 
+//  проверка для алерта время появления первых симптомов
+const [checkAlertSimptomDate, setCheckAlertSimptomDate] = useState(null);
+const [checkAlertSimptomHh, setCheckAlertSimptomHh] = useState(0);
+const [checkAlertSimptomMm, setCheckAlertSimptomMm] = useState(0);
+let checkDate = 0;
+if(checkAlertSimptomDate){checkDate = (new Date() - new Date(`${checkAlertSimptomDate}  ${checkAlertSimptomHh.length < 2 ? 0 + checkAlertSimptomHh : checkAlertSimptomHh}:${checkAlertSimptomMm.length < 2?  0 + checkAlertSimptomMm : checkAlertSimptomMm}:00`))/60000};
 
+// ==================>
 
   useEffect(() => {
     (async function getData() {
@@ -157,6 +168,11 @@ export const CheckListDetails = () => {
         if(data.normal?.intravenousAccess_defect){setIntravenousAccess_defect(JSON.parse(data.normal?.intravenousAccess_defect))};
         if(data.normal?.patientTakingAnticoagulants_defect){setPatientTakingAnticoagulants_defect(JSON.parse(data.normal?.patientTakingAnticoagulants_defect))};
         if(data.normal?.ecgTaken_defect){setEcgTaken_defect(JSON.parse(data.normal?.ecgTaken_defect))};
+        if(data.normal?.lossOfBalance_defect){setLossOfBalance_defect(JSON.parse(data.normal?.lossOfBalance_defect))};
+        if(data.normal?.visionProblems_defect){setVisionProblems_defect(JSON.parse(data.normal?.visionProblems_defect))};
+        if(data.normal?.firstSymptomsTimeHh){setCheckAlertSimptomHh(data.normal?.firstSymptomsTimeHh)};
+        if(data.normal?.firstSymptomsTimeMm){setCheckAlertSimptomMm(data.normal?.firstSymptomsTimeMm)};
+        if(data.normal?.firstSymptomsDate){setCheckAlertSimptomDate(data.normal?.firstSymptomsDate)};
       } catch (error) {
         setError(error);
       } finally {
@@ -181,7 +197,7 @@ export const CheckListDetails = () => {
         &hospitalizationTime=${inputDataHospitalizationTime}&hospitalizationDate=${inputDataHospitalizationDate}&patientFullName_defect=${patientFullName_defect}&patientINN_defect=${patientINN_defect}&patientSex_defect=${patientSex_defect}
         &visualDescription_defect=${visualDescription_defect}&saggingFace_defect=${saggingFace_defect}&handDisplacement_defect=${handDisplacement_defect}&speechDisorders_defect=${speechDisorders_defect}&firstSymptomsTime_defect=${firstSymptomsTime_defect}&bloodSugarLevel_defect=${bloodSugarLevel_defect}&bodyTemperature_defect=${bodyTemperature_defect}&arterialPressure_defect=${arterialPressure_defect}&patientBodyWeight_defect=${patientBodyWeight_defect}&patientAge_defect=${patientAge_defect}&intracranialHemorrhages_defect=${intracranialHemorrhages_defect}&majorSurgeriesOrSevereInjuries_defect=${majorSurgeriesOrSevereInjuries_defect}&surgicalInterventions_defect=${surgicalInterventions_defect}&myocardialInfarction_defect=${myocardialInfarction_defect}&stroke_defect=${stroke_defect}
         &arterialPuncture_defect=${arterialPuncture_defect}&smallOperations_defect=${smallOperations_defect}&cardiovascularDiseases_defect=${cardiovascularDiseases_defect}&acuteInfectiousDisease_defect=${acuteInfectiousDisease_defect}&hemorrhagicStroke_defect=${hemorrhagicStroke_defect}&convulsions_defect=${convulsions_defect}&onmk_defect=${onmk_defect}
-        &hemorrhages_defect=${hemorrhages_defect}&SACStroke_defect=${SACStroke_defect}&ischemicStroke_defect=${ischemicStroke_defect}&beginStrokeTreatment_defect=${beginStrokeTreatment_defect}&intravenousAccess_defect=${intravenousAccess_defect}&patientTakingAnticoagulants_defect=${patientTakingAnticoagulants_defect}&ecgTaken_defect=${ecgTaken_defect}`
+        &hemorrhages_defect=${hemorrhages_defect}&SACStroke_defect=${SACStroke_defect}&ischemicStroke_defect=${ischemicStroke_defect}&beginStrokeTreatment_defect=${beginStrokeTreatment_defect}&intravenousAccess_defect=${intravenousAccess_defect}&patientTakingAnticoagulants_defect=${patientTakingAnticoagulants_defect}&ecgTaken_defect=${ecgTaken_defect}&lossOfBalance_defect=${lossOfBalance_defect}&visionProblems_defect=${visionProblems_defect}`
       );
       if (!res) {
         return onFetchError('Whoops, something went wrong');
@@ -480,9 +496,43 @@ export const CheckListDetails = () => {
             </tbody>
           </Table>
 
-          <PatientBoxTitle>Методика F-A-S-T</PatientBoxTitle>
+          <PatientBoxTitle>Методика BE FAST</PatientBoxTitle>
           <Table>
             <tbody>
+              <Tr>
+                <Td>Потеря равновесия</Td>
+                <Td>
+                  {data?.lossOfBalance && data?.lossOfBalance.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="lossOfBalance_defect" name="lossOfBalance_defect" value={lossOfBalance_defect}
+                    onChange={()=>setLossOfBalance_defect(!lossOfBalance_defect)} checked={lossOfBalance_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={lossOfBalance_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={lossOfBalance_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
+              </Tr>
+              <Tr>
+                <Td>Проблемы со зрением, двоение в глазах</Td>
+                <Td>
+                  {data?.visionProblems && data?.visionProblems.toString() === 'true'
+                    ? 'Да'
+                    : '-'}
+                </Td>
+                <TdCheckCorrectItem>
+                  <label>
+                    <CheckBoxItem type="checkbox" id="visionProblems_defect" name="visionProblems_defect" value={visionProblems_defect}
+                    onChange={()=>setVisionProblems_defect(!visionProblems_defect)} checked={visionProblems_defect}></CheckBoxItem>
+                    <StylesCheckBoxItem $props={visionProblems_defect ? "4px" : "1px"}>
+                    <CheckIcon $props={visionProblems_defect ? "1" : "0.5"}/>
+                    </StylesCheckBoxItem>
+                  </label>
+                </TdCheckCorrectItem>
+              </Tr>
               <Tr>
                 <Td>Провисание на лице</Td>
                 <Td>
@@ -537,10 +587,12 @@ export const CheckListDetails = () => {
                 </TdCheckCorrectItem>
               </Tr>
               <Tr>
-                <Td>Время появления первых симптомов</Td>
-                <Td>
-                  {data?.firstSymptomsTimeHh}:{data?.firstSymptomsTimeMm}
-                </Td>
+                <TdRed $props={(checkDate > checkData.firstSymptomsTimeMin && checkDate < checkData.firstSymptomsTimeMax) ? theme.colors.accentCoral : theme.colors.darkGrey}>Время появления первых симптомов</TdRed>
+                <TdRed $props={(checkDate > checkData.firstSymptomsTimeMin && checkDate < checkData.firstSymptomsTimeMax) ? theme.colors.accentCoral : theme.colors.darkGrey}>
+                  {data?.firstSymptomsTimeHh ? `${data?.firstSymptomsTimeHh}:${data?.firstSymptomsTimeMm}`: "Нет данных"}
+                  {' / '}
+                  {data?.firstSymptomsDate ? data?.firstSymptomsDate : "Нет данных"}
+                </TdRed>
                 <TdCheckCorrectItem>
                   <label>
                     <CheckBoxItem type="checkbox" id="firstSymptomsTime_defect" name="firstSymptomsTime_defect" value={firstSymptomsTime_defect}

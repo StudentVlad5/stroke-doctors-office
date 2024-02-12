@@ -46,6 +46,7 @@ import {
   DecisionBoxTextareaLabel,
   TdCMP,
   TdCMPSpan,
+  DivForLabelDateTime,
 } from './CheckListDetails.styled';
 import clipboardCopy from 'clipboard-copy';
 import { useParams } from 'react-router-dom';
@@ -55,18 +56,31 @@ import { export2Docx } from 'services/exportToWord';
 import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import dayjs from 'dayjs'
-import 'dayjs/locale/de'
+import dayjs from 'dayjs';
+import 'dayjs/locale/de';
+import { makeStyles } from '@mui/styles';
 
+const useStyles = makeStyles({
+  datePickerContainer: {
+    backgroundColor: 'red',
+  },
+  dateTimePicker: {
+    fontSize: '30px',
+  },
+});
 
 export const CheckListDetails = () => {
+  const classes = useStyles();
+
   const [data, setData] = useState([]);
   const [isCopied, setIsCopied] = useState(false);
   const [inputDataNumberHospital, setInputDataNumberHospital] = useState('');
-  const [inputDataHospitalizationTime, setInputDataHospitalizationTime] =
-    useState('');
-  const [inputDataHospitalizationDate, setInputDataHospitalizationDate] =
-    useState('');
+  const [
+    inputDataHospitalizationTimeDate,
+    setInputDataHospitalizationTimeDate,
+  ] = useState('');
+  // const [inputDataHospitalizationDate, setInputDataHospitalizationDate] =
+  //   useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const routerParams = useParams();
@@ -136,12 +150,19 @@ export const CheckListDetails = () => {
   const [ecgTaken_defect, setEcgTaken_defect] = useState(false);
   const [lossOfBalance_defect, setLossOfBalance_defect] = useState(false);
   const [visionProblems_defect, setVisionProblems_defect] = useState(false);
-  const [, setNoteChecklistSMP_defect] = useState(false);//noteChecklistSMP_defect
+  const [, setNoteChecklistSMP_defect] = useState(false); //noteChecklistSMP_defect
   // Дополнительная информация от инсультного центра
-  // const [patientArrivalTime, setPatientArrivalTime] = useState('');
-  // const [patientArrivalDate, setPatientArrivalDate] = useState('');
+  const [patientArrivalTime, setPatientArrivalTime] = useState('');
+  const [patientArrivalDate, setPatientArrivalDate] = useState('');
   const [timeDateCt, setTimeDateCt] = useState('');
-  // const [tltTimeDate, setTltTimeDate] = useState('');
+  const [tltTimeDate, setTltTimeDate] = useState('');
+
+  const [timeDateCt_defect, setTimeDateCt_defect] = useState(false);
+  const [tltTimeDate_defect, setTltTimeDate_defect] = useState(false);
+  const [
+    inputDataHospitalizationTimeDate_defect,
+    setInputDataHospitalizationTimeDate_defect,
+  ] = useState(false);
   // Заключительное решение
   const [hospitalizationDepartment, setHospitalizationDepartment] =
     useState('');
@@ -187,12 +208,14 @@ export const CheckListDetails = () => {
         if (data.normal?.numberHospital) {
           setInputDataNumberHospital(data.normal?.numberHospital);
         }
-        if (data.normal?.hospitalizationTime) {
-          setInputDataHospitalizationTime(data.normal?.hospitalizationTime);
+        if (data.normal?.inputDataHospitalizationTimeDate) {
+          setInputDataHospitalizationTimeDate(
+            new Date(data.normal?.inputDataHospitalizationTimeDate)
+          );
         }
-        if (data.normal?.hospitalizationDate) {
-          setInputDataHospitalizationDate(data.normal?.hospitalizationDate);
-        }
+        // if (data.normal?.hospitalizationDate) {
+        //   setInputDataHospitalizationDate(data.normal?.hospitalizationDate);
+        // }
         if (data.normal?.patientFullName_defect) {
           setPatientFullName_defect(
             JSON.parse(data.normal?.patientFullName_defect)
@@ -371,12 +394,27 @@ export const CheckListDetails = () => {
         if (data.normal?.timeDateCt) {
           setTimeDateCt(new Date(data.normal?.timeDateCt));
         }
-        // if (data.normal?.hospitalizationDepartment) {
-        //   setHospitalizationDepartment(hospitalizationDepartment);
-        // }
-        // if (data.normal?.hospitalizationDepartment) {
-        //   setHospitalizationDepartment(hospitalizationDepartment);
-        // }
+        if (data.normal?.tltTimeDate) {
+          setTltTimeDate(new Date(data.normal?.tltTimeDate));
+        }
+        if (data.normal?.patientArrivalTime) {
+          setPatientArrivalTime(data.normal?.patientArrivalTime);
+        }
+        if (data.normal?.patientArrivalDate) {
+          setPatientArrivalDate(data.normal?.patientArrivalDate);
+        }
+        if (data.normal?.timeDateCt_defect) {
+          setTimeDateCt_defect(data.normal?.timeDateCt_defect);
+        }
+        if (data.normal?.tltTimeDate_defect) {
+          setTltTimeDate_defect(data.normal?.tltTimeDate_defect);
+        }
+        if (data.normal?.inputDataHospitalizationTimeDate_defect) {
+          setInputDataHospitalizationTimeDate_defect(
+            data.normal?.inputDataHospitalizationTimeDate_defect
+          );
+        }
+
         // if (data.normal?.hospitalizationDepartment) {
         //   setHospitalizationDepartment(hospitalizationDepartment);
         // }
@@ -398,15 +436,14 @@ export const CheckListDetails = () => {
 
     try {
       setIsLoading(true);
-
+      // hospitalizationTime=${inputDataHospitalizationTime}&hospitalizationDate=${inputDataHospitalizationDate}
       const res = await fetchData(
         `edit?identifier=${identifier}&numberHospital=${inputDataNumberHospital}
-        &hospitalizationTime=${inputDataHospitalizationTime}&hospitalizationDate=${inputDataHospitalizationDate}&patientFullName_defect=${patientFullName_defect}&patientINN_defect=${patientINN_defect}&patientSex_defect=${patientSex_defect}
+        &inputDataHospitalizationTimeDate=${inputDataHospitalizationTimeDate}&patientFullName_defect=${patientFullName_defect}&patientINN_defect=${patientINN_defect}&patientSex_defect=${patientSex_defect}
         &visualDescription_defect=${visualDescription_defect}&saggingFace_defect=${saggingFace_defect}&handDisplacement_defect=${handDisplacement_defect}&speechDisorders_defect=${speechDisorders_defect}&firstSymptomsTime_defect=${firstSymptomsTime_defect}&bloodSugarLevel_defect=${bloodSugarLevel_defect}&bodyTemperature_defect=${bodyTemperature_defect}&arterialPressure_defect=${arterialPressure_defect}&patientBodyWeight_defect=${patientBodyWeight_defect}&patientAge_defect=${patientAge_defect}&intracranialHemorrhages_defect=${intracranialHemorrhages_defect}&majorSurgeriesOrSevereInjuries_defect=${majorSurgeriesOrSevereInjuries_defect}&surgicalInterventions_defect=${surgicalInterventions_defect}&myocardialInfarction_defect=${myocardialInfarction_defect}&stroke_defect=${stroke_defect}
         &arterialPuncture_defect=${arterialPuncture_defect}&smallOperations_defect=${smallOperations_defect}&cardiovascularDiseases_defect=${cardiovascularDiseases_defect}&acuteInfectiousDisease_defect=${acuteInfectiousDisease_defect}&hemorrhagicStroke_defect=${hemorrhagicStroke_defect}&convulsions_defect=${convulsions_defect}&onmk_defect=${onmk_defect}
         &hemorrhages_defect=${hemorrhages_defect}&SACStroke_defect=${SACStroke_defect}&ischemicStroke_defect=${ischemicStroke_defect}&beginStrokeTreatment_defect=${beginStrokeTreatment_defect}&intravenousAccess_defect=${intravenousAccess_defect}&patientTakingAnticoagulants_defect=${patientTakingAnticoagulants_defect}&ecgTaken_defect=${ecgTaken_defect}&lossOfBalance_defect=${lossOfBalance_defect}&visionProblems_defect=${visionProblems_defect}&selectedOption=${selectedOption}&hospitalizationDepartment=${hospitalizationDepartment}
-        &noteChecklistStrokeCenter_defect=${noteChecklistStrokeCenter_defect}&timeDateCt=${timeDateCt}`
-        // &timeDateCt=${timeDateCt}
+        &noteChecklistStrokeCenter_defect=${noteChecklistStrokeCenter_defect}&timeDateCt=${timeDateCt}&tltTimeDate=${tltTimeDate}&patientArrivalTime=${patientArrivalTime}&patientArrivalDate=${patientArrivalDate}&timeDateCt_defect=${timeDateCt_defect}&tltTimeDate_defect=${tltTimeDate_defect}&inputDataHospitalizationTimeDate_defect=${inputDataHospitalizationTimeDate_defect}`
       );
       if (!res) {
         return onFetchError('Whoops, something went wrong');
@@ -603,17 +640,31 @@ export const CheckListDetails = () => {
       }:${data?.endTimeAutoMm ? data?.endTimeAutoMm : ' '} ${moment(
       new Date(+data?.identifier)
     ).format('DD.MM.YYYY')}
-    Примечание к чек-листу от СМП: ${data?.noteChecklistSMP || ''}
+      Примечание к чек-листу от СМП: ${data?.noteChecklistSMP || ''}
 
     Дополнительная информация от инсультного центра:
       Поликлиника прикрепления пациента: ${data?.numberHospital || ''}
-      Дата и время прибытия пациента: 
-      Дата и время проведения КТ:
-      Дата и время проведения ТЛТ:
-      Дата и время госпитализации: ${data?.hospitalizationTime || ''}  ${
-      data?.hospitalizationDate || ''
+      Дата и время прибытия пациента: ${data?.patientArrivalTime || ''}  ${
+      data?.patientArrivalDate || ''
     }
-
+      Дата и время проведения КТ: ${
+        data?.timeDateCt
+          ? moment(new Date(data?.timeDateCt)).format('HH:mm DD-MM-YYYY')
+          : ''
+      } 
+      Дата и время проведения ТЛТ: ${
+        data?.tltTimeDate
+          ? moment(new Date(data?.tltTimeDate)).format('HH:mm DD-MM-YYYY')
+          : ''
+      }
+      Дата и время госпитализации: ${
+        data?.inputDataHospitalizationTimeDate
+          ? moment(new Date(data?.inputDataHospitalizationTimeDate)).format(
+              'HH:mm DD-MM-YYYY'
+            )
+          : ''
+      }
+      
       Заключительное решение:
        Госпитализация в Инсультный центр: ${
          data?.selectedOption === 'hospitalizationStrokeCenter' ? 'Да' : 'Нет'
@@ -627,18 +678,17 @@ export const CheckListDetails = () => {
        Примечание к чек-листу от Инсультного центра:  ${
          data?.noteChecklistStrokeCenter_defect || ''
        }
-       
-
   `;
     clipboardCopy(patientData);
-
+    // ${data?.hospitalizationTime || ''}  ${
+    //   data?.hospitalizationDate || ''
+    // }
     navigator.clipboard.writeText(patientData).then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 3000);
     });
   };
 
-  
   return (
     <Container>
       {isLoading ? onLoading() : onLoaded()}
@@ -2139,19 +2189,15 @@ export const CheckListDetails = () => {
                 <AdditionalInfoDataLable>
                   <AdditionalInfoDataInput
                     type="time"
-                    // value={inputDataHospitalizationTime}
-                    // onChange={e =>
-                    //   setInputDataHospitalizationTime(e.target.value)
-                    // }
+                    value={patientArrivalTime}
+                    onChange={e => setPatientArrivalTime(e.target.value)}
                   />
                 </AdditionalInfoDataLable>
                 <AdditionalInfoDataLable2>
                   <AdditionalInfoDataInput2
                     type="date"
-                    // value={inputDataHospitalizationDate}
-                    // onChange={e =>
-                    //   setInputDataHospitalizationDate(e.target.value)
-                    // }
+                    value={patientArrivalDate}
+                    onChange={e => setPatientArrivalDate(e.target.value)}
                   />
                 </AdditionalInfoDataLable2>
               </AdditionalInfoDataLableBox>
@@ -2162,26 +2208,41 @@ export const CheckListDetails = () => {
                 Дата и время проведения КТ
               </AdditionalInfoFormText>
               <AdditionalInfoDataLableBox>
-                <AdditionalInfoDataLable>
-                  {/* <AdditionalInfoDataInput
-                    type="time"
-                    // value={inputDataHospitalizationTime}
-                    // onChange={e =>
-                    //   setInputDataHospitalizationTime(e.target.value)
-                    // }
-                  /> */}
-                  <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="de">
-                    <DemoContainer components={['DateTimePicker']}>
-                      <DateTimePicker
-                        label="Введите время и дату"
-                        ampm={false}
-                        format="DD-MM-YYYY HH:mm"
-                        onChange={newValue => setTimeDateCt(newValue)}
-                        value={dayjs(new Date(timeDateCt)).locale('de')}
-                      />
-                    </DemoContainer>
-                  </LocalizationProvider>
-                </AdditionalInfoDataLable>
+                <LocalizationProvider
+                  dateAdapter={AdapterDayjs}
+                  adapterLocale="de"
+                  // className={classes.datePickerContainer}
+                  // classes={{ root: classes.datePickerContainer }}
+                >
+                  <DemoContainer components={['DateTimePicker']}>
+                    <DateTimePicker
+                      className={classes.dateTimePicker}
+                      label="Введите время и дату"
+                      ampm={false}
+                      format="DD-MM-YYYY HH:mm"
+                      onChange={newValue => setTimeDateCt(newValue)}
+                      value={dayjs(new Date(timeDateCt)).locale('de')}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+
+                <DivForLabelDateTime>
+                  <label style={{ position: 'absolute' }}>
+                    <CheckBoxItem
+                      type="checkbox"
+                      id="timeDateCt_defect"
+                      name="timeDateCt_defect"
+                      value={timeDateCt_defect}
+                      onChange={() => setTimeDateCt_defect(!timeDateCt_defect)}
+                      checked={timeDateCt_defect}
+                    ></CheckBoxItem>
+                    <StylesCheckBoxItem
+                      $props={timeDateCt_defect ? '4px' : '1px'}
+                    >
+                      <CheckIcon $props={timeDateCt_defect ? '1' : '0.5'} />
+                    </StylesCheckBoxItem>
+                  </label>
+                </DivForLabelDateTime>
               </AdditionalInfoDataLableBox>
             </AdditionalInfoDataBox>
 
@@ -2190,12 +2251,39 @@ export const CheckListDetails = () => {
                 Дата и время проведения ТЛТ
               </AdditionalInfoFormText>
               <AdditionalInfoDataLableBox>
-                <AdditionalInfoDataLable>
-                  <AdditionalInfoDataInput type="time" />
-                </AdditionalInfoDataLable>
-                <AdditionalInfoDataLable2>
-                  <AdditionalInfoDataInput2 type="date" />
-                </AdditionalInfoDataLable2>
+                <LocalizationProvider
+                  dateAdapter={AdapterDayjs}
+                  adapterLocale="de"
+                >
+                  <DemoContainer components={['DateTimePicker']}>
+                    <DateTimePicker
+                      label="Введите время и дату"
+                      ampm={false}
+                      format="DD-MM-YYYY HH:mm"
+                      onChange={newValue => setTltTimeDate(newValue)}
+                      value={dayjs(new Date(tltTimeDate)).locale('de')}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+                <DivForLabelDateTime>
+                  <label style={{ position: 'absolute' }}>
+                    <CheckBoxItem
+                      type="checkbox"
+                      id="tltTimeDate_defect"
+                      name="tltTimeDate_defect"
+                      value={tltTimeDate_defect}
+                      onChange={() =>
+                        setTltTimeDate_defect(!tltTimeDate_defect)
+                      }
+                      checked={tltTimeDate_defect}
+                    ></CheckBoxItem>
+                    <StylesCheckBoxItem
+                      $props={tltTimeDate_defect ? '4px' : '1px'}
+                    >
+                      <CheckIcon $props={tltTimeDate_defect ? '1' : '0.5'} />
+                    </StylesCheckBoxItem>
+                  </label>
+                </DivForLabelDateTime>
               </AdditionalInfoDataLableBox>
             </AdditionalInfoDataBox>
 
@@ -2204,24 +2292,51 @@ export const CheckListDetails = () => {
                 Дата и время госпитализации
               </AdditionalInfoFormText>
               <AdditionalInfoDataLableBox>
-                <AdditionalInfoDataLable>
-                  <AdditionalInfoDataInput
-                    type="time"
-                    value={inputDataHospitalizationTime}
-                    onChange={e =>
-                      setInputDataHospitalizationTime(e.target.value)
-                    }
-                  />
-                </AdditionalInfoDataLable>
-                <AdditionalInfoDataLable2>
-                  <AdditionalInfoDataInput2
-                    type="date"
-                    value={inputDataHospitalizationDate}
-                    onChange={e =>
-                      setInputDataHospitalizationDate(e.target.value)
-                    }
-                  />
-                </AdditionalInfoDataLable2>
+                <LocalizationProvider
+                  dateAdapter={AdapterDayjs}
+                  adapterLocale="de"
+                >
+                  <DemoContainer components={['DateTimePicker']}>
+                    <DateTimePicker
+                      label="Введите время и дату"
+                      ampm={false}
+                      format="DD-MM-YYYY HH:mm"
+                      onChange={newValue =>
+                        setInputDataHospitalizationTimeDate(newValue)
+                      }
+                      value={dayjs(
+                        new Date(inputDataHospitalizationTimeDate)
+                      ).locale('de')}
+                    />
+                  </DemoContainer>
+                </LocalizationProvider>
+                <DivForLabelDateTime>
+                  <label style={{ position: 'absolute' }}>
+                    <CheckBoxItem
+                      type="checkbox"
+                      id="inputDataHospitalizationTimeDate_defect"
+                      name="inputDataHospitalizationTimeDate_defect"
+                      value={inputDataHospitalizationTimeDate_defect}
+                      onChange={() =>
+                        setInputDataHospitalizationTimeDate_defect(
+                          !inputDataHospitalizationTimeDate_defect
+                        )
+                      }
+                      checked={inputDataHospitalizationTimeDate_defect}
+                    ></CheckBoxItem>
+                    <StylesCheckBoxItem
+                      $props={
+                        inputDataHospitalizationTimeDate_defect ? '4px' : '1px'
+                      }
+                    >
+                      <CheckIcon
+                        $props={
+                          inputDataHospitalizationTimeDate_defect ? '1' : '0.5'
+                        }
+                      />
+                    </StylesCheckBoxItem>
+                  </label>
+                </DivForLabelDateTime>
               </AdditionalInfoDataLableBox>
             </AdditionalInfoDataBox>
 
@@ -2232,10 +2347,17 @@ export const CheckListDetails = () => {
                   Госпитализация в Инсультный центр
                 </AdditionalInfoFormText>
                 <DecisionBoxInput
-                  type="radio"
+                  type="checkbox"
                   value="hospitalizationStrokeCenter"
                   checked={selectedOption === 'hospitalizationStrokeCenter'}
-                  onChange={e => setSelectedOption(e.target.value)}
+                  // onChange={e => setSelectedOption(e.target.value)}
+                  onChange={e => {
+                    setSelectedOption(prevOption => {
+                      return prevOption === 'hospitalizationStrokeCenter'
+                        ? ''
+                        : 'hospitalizationStrokeCenter';
+                    });
+                  }}
                 />
               </DecisionBoxLabel>
 
@@ -2244,10 +2366,17 @@ export const CheckListDetails = () => {
                   Направление на амбулаторное лечение
                 </AdditionalInfoFormText>
                 <DecisionBoxInput
-                  type="radio"
+                  type="checkbox"
                   value="outpatientTreatment"
                   checked={selectedOption === 'outpatientTreatment'}
-                  onChange={e => setSelectedOption(e.target.value)}
+                  // onChange={e => setSelectedOption(e.target.value)}
+                  onChange={e => {
+                    setSelectedOption(prevOption => {
+                      return prevOption === 'outpatientTreatment'
+                        ? ''
+                        : 'outpatientTreatment';
+                    });
+                  }}
                 />
               </DecisionBoxLabel>
 
@@ -2279,11 +2408,7 @@ export const CheckListDetails = () => {
             </DecisionBox>
 
             <AdditionalInfoBtnBox>
-              <AdditionalInfoBtn
-                type="submit"
-                onClick={handleSubmit}
-                // onClick={handleConfirmClick}
-              >
+              <AdditionalInfoBtn type="submit" onClick={handleSubmit}>
                 Сохранить чек-лист
               </AdditionalInfoBtn>
             </AdditionalInfoBtnBox>

@@ -82,10 +82,10 @@ const useStyles = makeStyles({
       },
       '& div': {
         '& button': {
-          '& svg': { 
+          '& svg': {
             width: '35px',
             height: '35px',
-          }
+          },
         },
       },
       '& fieldset': {
@@ -436,14 +436,14 @@ export const CheckListDetails = () => {
           setPatientArrivalDate(data.normal?.patientArrivalDate);
         }
         if (data.normal?.timeDateCt_defect) {
-          setTimeDateCt_defect(data.normal?.timeDateCt_defect);
+          setTimeDateCt_defect(JSON.parse(data.normal?.timeDateCt_defect));
         }
         if (data.normal?.tltTimeDate_defect) {
-          setTltTimeDate_defect(data.normal?.tltTimeDate_defect);
+          setTltTimeDate_defect(JSON.parse(data.normal?.tltTimeDate_defect));
         }
         if (data.normal?.inputDataHospitalizationTimeDate_defect) {
           setInputDataHospitalizationTimeDate_defect(
-            data.normal?.inputDataHospitalizationTimeDate_defect
+            JSON.parse(data.normal?.inputDataHospitalizationTimeDate_defect)
           );
         }
       } catch (error) {

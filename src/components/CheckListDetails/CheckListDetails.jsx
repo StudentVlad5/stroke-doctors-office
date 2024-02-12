@@ -155,9 +155,11 @@ export const CheckListDetails = () => {
   const [checkAlertSimptomDate, setCheckAlertSimptomDate] = useState(null);
   const [checkAlertSimptomHh, setCheckAlertSimptomHh] = useState(0);
   const [checkAlertSimptomMm, setCheckAlertSimptomMm] = useState(0);
-  let checkDate = 0;
+  const [checkDateAlertSimptomDate, setCheckDateAlertSimptomDate] = useState(0);
+
   if (checkAlertSimptomDate) {
-    checkDate =
+    let checkAlert = ''
+    checkAlert =
       (new Date() -
         new Date(
           `${checkAlertSimptomDate}  ${
@@ -171,6 +173,7 @@ export const CheckListDetails = () => {
           }:00`
         )) /
       60000;
+      setCheckDateAlertSimptomDate(checkAlert);
   }
 
   // ==================>
@@ -931,8 +934,7 @@ export const CheckListDetails = () => {
               <Tr>
                 <TdRed
                   $props={
-                    checkDate > checkData.firstSymptomsTimeMin &&
-                    checkDate < checkData.firstSymptomsTimeMax
+                    checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin 
                       ? theme.colors.accentCoral
                       : theme.colors.darkGrey
                   }
@@ -941,8 +943,7 @@ export const CheckListDetails = () => {
                 </TdRed>
                 <TdRed
                   $props={
-                    checkDate > checkData.firstSymptomsTimeMin &&
-                    checkDate < checkData.firstSymptomsTimeMax
+                    checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin
                       ? theme.colors.accentCoral
                       : theme.colors.darkGrey
                   }
@@ -954,6 +955,11 @@ export const CheckListDetails = () => {
                   {data?.firstSymptomsDate
                     ? data?.firstSymptomsDate
                     : 'Нет данных'}
+                  {checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin &&
+                    checkDateAlertSimptomDate < checkData.firstSymptomsTimeMax && <span style={{color:"red", fontWeight:"700"}}>"Более 4,5 часов"</span>
+                    }
+                  {checkDateAlertSimptomDate >= checkData.firstSymptomsTimeMax && <span style={{color:"red", fontWeight:"700"}}>"Более 72 часов"</span>
+                    }
                 </TdRed>
                 <TdCheckCorrectItem>
                   <label>

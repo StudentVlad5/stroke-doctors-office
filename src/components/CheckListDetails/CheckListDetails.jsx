@@ -75,10 +75,18 @@ const useStyles = makeStyles({
       borderRadius: '17px',
       '& input': {
         paddingTop: '20px',
-        paddingRight: '67px',
+        paddingRight: '53px',
         paddingBottom: '20px',
         paddingLeft: '20px',
         borderRadius: '17px',
+      },
+      '& div': {
+        '& button': {
+          '& svg': { 
+            width: '35px',
+            height: '35px',
+          }
+        },
       },
       '& fieldset': {
         border: '1px solid #000000',

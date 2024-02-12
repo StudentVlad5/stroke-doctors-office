@@ -4,8 +4,6 @@ import { ReactComponent as copyIcon } from 'images/svg/copy.svg';
 import { ReactComponent as wordIcon } from 'images/svg/word.svg';
 import { ReactComponent as checkIcon } from 'images/svg/check.svg';
 import { Link } from 'react-router-dom';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 export const CheckListBox = styled.div`
   display: flex;
@@ -501,10 +499,6 @@ export const TdCMPSpan = styled.span`
   &:last-child {
     top: 70px;
   }
-`;
-
-export const LocalizationProviderBox = styled(LocalizationProvider)`
-  background-color: aqua;
 `;
 
 export const DivForLabelDateTime = styled.div`

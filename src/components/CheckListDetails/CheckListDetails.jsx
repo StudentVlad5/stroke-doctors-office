@@ -61,11 +61,32 @@ import 'dayjs/locale/de';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
-  datePickerContainer: {
-    backgroundColor: 'red',
-  },
   dateTimePicker: {
-    fontSize: '30px',
+    '& label': {
+      color: '#000000',
+      fontSize: '24px',
+    },
+    '& div': {
+      backgroundColor: '#FFFFFF',
+      fontSize: '28px',
+      fontStyle: 'normal',
+      fontWeight: 400,
+      lineHeight: 'normal',
+      borderRadius: '17px',
+      '& input': {
+        paddingTop: '20px',
+        paddingRight: '67px',
+        paddingBottom: '20px',
+        paddingLeft: '20px',
+        borderRadius: '17px',
+      },
+      '& fieldset': {
+        border: '1px solid #000000',
+        '& legend': {
+          fontSize: '0.64em',
+        },
+      },
+    },
   },
 });
 
@@ -179,7 +200,7 @@ export const CheckListDetails = () => {
   const [checkDateAlertSimptomDate, setCheckDateAlertSimptomDate] = useState(0);
 
   if (checkAlertSimptomDate) {
-    let checkAlert = ''
+    let checkAlert = '';
     checkAlert =
       (new Date() -
         new Date(
@@ -194,7 +215,7 @@ export const CheckListDetails = () => {
           }:00`
         )) /
       60000;
-      setCheckDateAlertSimptomDate(checkAlert);
+    setCheckDateAlertSimptomDate(checkAlert);
   }
 
   // ==================>
@@ -417,10 +438,6 @@ export const CheckListDetails = () => {
             data.normal?.inputDataHospitalizationTimeDate_defect
           );
         }
-
-        // if (data.normal?.hospitalizationDepartment) {
-        //   setHospitalizationDepartment(hospitalizationDepartment);
-        // }
       } catch (error) {
         setError(error);
       } finally {
@@ -652,18 +669,18 @@ export const CheckListDetails = () => {
     }
       Дата и время проведения КТ: ${
         data?.timeDateCt
-          ? moment(new Date(data?.timeDateCt)).format('HH:mm DD-MM-YYYY')
+          ? moment(new Date(data?.timeDateCt)).format('HH:mm DD.MM.YYYY')
           : ''
       } 
       Дата и время проведения ТЛТ: ${
         data?.tltTimeDate
-          ? moment(new Date(data?.tltTimeDate)).format('HH:mm DD-MM-YYYY')
+          ? moment(new Date(data?.tltTimeDate)).format('HH:mm DD.MM.YYYY')
           : ''
       }
       Дата и время госпитализации: ${
         data?.inputDataHospitalizationTimeDate
           ? moment(new Date(data?.inputDataHospitalizationTimeDate)).format(
-              'HH:mm DD-MM-YYYY'
+              'HH:mm DD.MM.YYYY'
             )
           : ''
       }
@@ -984,7 +1001,7 @@ export const CheckListDetails = () => {
               <Tr>
                 <TdRed
                   $props={
-                    checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin 
+                    checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin
                       ? theme.colors.accentCoral
                       : theme.colors.darkGrey
                   }
@@ -1006,10 +1023,18 @@ export const CheckListDetails = () => {
                     ? data?.firstSymptomsDate
                     : 'Нет данных'}
                   {checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin &&
-                    checkDateAlertSimptomDate < checkData.firstSymptomsTimeMax && <span style={{color:"red", fontWeight:"700"}}>"Более 4,5 часов"</span>
-                    }
-                  {checkDateAlertSimptomDate >= checkData.firstSymptomsTimeMax && <span style={{color:"red", fontWeight:"700"}}>"Более 72 часов"</span>
-                    }
+                    checkDateAlertSimptomDate <
+                      checkData.firstSymptomsTimeMax && (
+                      <span style={{ color: 'red', fontWeight: '700' }}>
+                        "Более 4,5 часов"
+                      </span>
+                    )}
+                  {checkDateAlertSimptomDate >=
+                    checkData.firstSymptomsTimeMax && (
+                    <span style={{ color: 'red', fontWeight: '700' }}>
+                      "Более 72 часов"
+                    </span>
+                  )}
                 </TdRed>
                 <TdCheckCorrectItem>
                   <label>
@@ -2217,15 +2242,13 @@ export const CheckListDetails = () => {
                 <LocalizationProvider
                   dateAdapter={AdapterDayjs}
                   adapterLocale="de"
-                  // className={classes.datePickerContainer}
-                  // classes={{ root: classes.datePickerContainer }}
                 >
                   <DemoContainer components={['DateTimePicker']}>
                     <DateTimePicker
                       className={classes.dateTimePicker}
                       label="Введите время и дату"
                       ampm={false}
-                      format="DD-MM-YYYY HH:mm"
+                      format="DD.MM.YYYY HH:mm"
                       onChange={newValue => setTimeDateCt(newValue)}
                       value={dayjs(new Date(timeDateCt)).locale('de')}
                     />
@@ -2263,9 +2286,10 @@ export const CheckListDetails = () => {
                 >
                   <DemoContainer components={['DateTimePicker']}>
                     <DateTimePicker
+                      className={classes.dateTimePicker}
                       label="Введите время и дату"
                       ampm={false}
-                      format="DD-MM-YYYY HH:mm"
+                      format="DD.MM.YYYY HH:mm"
                       onChange={newValue => setTltTimeDate(newValue)}
                       value={dayjs(new Date(tltTimeDate)).locale('de')}
                     />
@@ -2304,9 +2328,10 @@ export const CheckListDetails = () => {
                 >
                   <DemoContainer components={['DateTimePicker']}>
                     <DateTimePicker
+                      className={classes.dateTimePicker}
                       label="Введите время и дату"
                       ampm={false}
-                      format="DD-MM-YYYY HH:mm"
+                      format="DD.MM.YYYY HH:mm"
                       onChange={newValue =>
                         setInputDataHospitalizationTimeDate(newValue)
                       }

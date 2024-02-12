@@ -5,6 +5,7 @@ import { ReactComponent as wordIcon } from 'images/svg/word.svg';
 import { ReactComponent as checkIcon } from 'images/svg/check.svg';
 import { Link } from 'react-router-dom';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { DateTimePicker, LocalizationProvider } from '@mui/x-date-pickers';
 
 export const CheckListBox = styled.div`
   display: flex;
@@ -306,6 +307,12 @@ export const AdditionalInfoDataLableBox = styled.div`
   }
 `;
 
+export const AdditionalInfoDataLableBox2 = styled(AdditionalInfoDataLableBox)`
+  /* background-color: white;
+  border-radius: 5px;
+  font-size: 20px; */
+`;
+
 export const AdditionalInfoDataLable = styled.label`
   margin-bottom: 20px;
   @media screen and (min-width: 1022px) {
@@ -436,6 +443,10 @@ export const DecisionBoxInput = styled.input`
   border-radius: 11px;
   cursor: pointer;
   border-color: #7a7a7a;
+
+  &[type='checkbox']:checked {
+    accent-color: #009b2b;
+  }
 `;
 
 export const DecisionBoxTextareaLabel = styled.label`
@@ -487,16 +498,22 @@ export const TdCMPSpan = styled.span`
   position: absolute;
   top: 12px;
 
-  &:last-child{
+  &:last-child {
     top: 70px;
   }
 `;
 
-export const LocalizationProviderBox = styled(DemoContainer)`
-background-color: aqua;
+export const LocalizationProviderBox = styled(LocalizationProvider)`
+  background-color: aqua;
 `;
 
-// export const DecisionBox = styled.div``;
+export const DivForLabelDateTime = styled.div`
+  width: 50px;
+  height: 50px;
+  position: relative;
+  margin-left: 20px;
+`;
+
 // export const DecisionBox = styled.div``;
 // export const DecisionBox = styled.div``;
 // export const DecisionBox = styled.div``;

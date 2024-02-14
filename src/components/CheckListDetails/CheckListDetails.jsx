@@ -179,7 +179,7 @@ export const CheckListDetails = () => {
   const [ecgTaken_defect, setEcgTaken_defect] = useState(false);
   const [lossOfBalance_defect, setLossOfBalance_defect] = useState(false);
   const [visionProblems_defect, setVisionProblems_defect] = useState(false);
-  const [, setNoteChecklistSMP_defect] = useState(false); //noteChecklistSMP_defect
+  // const [, setNoteChecklistSMP_defect] = useState(false); //noteChecklistSMP_defect
   // Дополнительная информация от инсультного центра
   const [patientArrivalTime, setPatientArrivalTime] = useState('');
   const [patientArrivalDate, setPatientArrivalDate] = useState('');
@@ -418,11 +418,11 @@ export const CheckListDetails = () => {
             data.normal?.noteChecklistStrokeCenter_defect
           );
         }
-        if (data.normal?.noteChecklistSMP_defect) {
-          setNoteChecklistSMP_defect(
-            JSON.parse(data.normal?.noteChecklistSMP_defect)
-          );
-        }
+        // if (data.normal?.noteChecklistSMP_defect) {
+        //   setNoteChecklistSMP_defect(
+        //     JSON.parse(data.normal?.noteChecklistSMP_defect)
+        //   );
+        // }
         if (data.normal?.timeDateCt) {
           setTimeDateCt(new Date(data.normal?.timeDateCt));
         }
@@ -2196,7 +2196,7 @@ export const CheckListDetails = () => {
 
                   <br />
                   <br />
-                  <TdCMPSpan>{data?.noteChecklistSMP_defect}</TdCMPSpan>
+                  <TdCMPSpan>{data?.noteChecklistSMP}</TdCMPSpan>
                 </TdCMP>
               </Tr>
             </tbody>

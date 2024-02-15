@@ -206,25 +206,31 @@ export const CheckListDetails = () => {
   const [checkAlertSimptomHh, setCheckAlertSimptomHh] = useState(0);
   const [checkAlertSimptomMm, setCheckAlertSimptomMm] = useState(0);
   const [checkDateAlertSimptomDate, setCheckDateAlertSimptomDate] = useState(0);
+  // console.log('checkAlertSimptomDate', checkAlertSimptomDate);
+  // console.log('checkAlertSimptomHh', checkAlertSimptomHh);
+  // console.log('checkAlertSimptomMm', checkAlertSimptomMm);
 
-  if (checkAlertSimptomDate) {
-    let checkAlert = '';
-    checkAlert =
-      (new Date() -
-        new Date(
-          `${checkAlertSimptomDate}  ${
-            checkAlertSimptomHh.length < 2
-              ? 0 + checkAlertSimptomHh
-              : checkAlertSimptomHh
-          }:${
-            checkAlertSimptomMm.length < 2
-              ? 0 + checkAlertSimptomMm
-              : checkAlertSimptomMm
-          }:00`
-        )) /
-      60000;
-    setCheckDateAlertSimptomDate(checkAlert);
-  }
+  // if (checkAlertSimptomDate) {
+  //   let checkAlert = '';
+  //   checkAlert =
+  //     (new Date() -
+  //       new Date(
+  //         `${checkAlertSimptomDate}  ${
+  //           checkAlertSimptomHh.length < 2
+  //             ? 0 + checkAlertSimptomHh
+  //             : checkAlertSimptomHh
+  //         }:${
+  //           checkAlertSimptomMm.length < 2
+  //             ? 0 + checkAlertSimptomMm
+  //             : checkAlertSimptomMm
+  //         }:00`
+  //       )) /
+  //     60000;
+  //   console.log(checkAlert);
+  //   // setCheckDateAlertSimptomDate(checkAlert);
+  // }
+
+  console.log(checkDateAlertSimptomDate);
 
   // ==================>
 
@@ -454,6 +460,24 @@ export const CheckListDetails = () => {
     })();
   }, [id]);
 
+  const momentCheckDate = moment(checkDateAlertSimptomDate);
+  const today = moment();
+  const firstSymptomDate = moment(
+    `${checkAlertSimptomDate} ${checkAlertSimptomHh}:${checkAlertSimptomMm}`,
+    'YYYY-MM-DD HH:mm'
+  );
+  
+  const hoursDifference = today.diff(firstSymptomDate, 'hours');
+  
+  let message;
+  if (hoursDifference >= 72) {
+    message = 'Более 72 часов';
+  } else if (hoursDifference >= 4.5) {
+    message = 'Более 4,5 часов';
+  } else {
+  }
+  console.log(message);
+
   const handleSubmit = async e => {
     e.preventDefault();
 
@@ -533,7 +557,7 @@ export const CheckListDetails = () => {
       }
       Время появления первых симптомов: ${data?.firstSymptomsTimeHh}:${
       data?.firstSymptomsTimeMm
-    } 
+    } / ${data?.firstSymptomsDate}
 
     Действия при подозрении на инсульт: 
       Начата процедура лечения инсульта: ${
@@ -1030,19 +1054,21 @@ export const CheckListDetails = () => {
                   {data?.firstSymptomsDate
                     ? data?.firstSymptomsDate
                     : 'Нет данных'}
-                  {checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin &&
+                  {/* {checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin &&
                     checkDateAlertSimptomDate <
-                      checkData.firstSymptomsTimeMax && (
-                      <span style={{ color: 'red', fontWeight: '700' }}>
-                        "Более 4,5 часов"
-                      </span>
-                    )}
-                  {checkDateAlertSimptomDate >=
-                    checkData.firstSymptomsTimeMax && (
-                    <span style={{ color: 'red', fontWeight: '700' }}>
-                      "Более 72 часов"
+                      checkData.firstSymptomsTimeMax && ( */}
+                      {/* <span style={{ color: 'red', fontWeight: '700' }}> */}
+                        {/* "Более 4,5 часов" */}
+                        {/* {message} */}
+                      {/* </span> */}
+                    {/* )} */}
+                  {/* {checkDateAlertSimptomDate >=
+                    checkData.firstSymptomsTimeMax && ( */}
+                    <span style={{ color: 'red', fontWeight: '700', marginLeft: 55}}>
+                      {/* "Более 72 часов" */}
+                      {message}
                     </span>
-                  )}
+                  {/* )} */}
                 </TdRed>
                 <TdCheckCorrectItem>
                   <label>

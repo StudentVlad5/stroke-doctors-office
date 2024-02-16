@@ -123,8 +123,8 @@ export const CheckListDetails = () => {
     arterialPressureD: 180,
     patientAgeMin: 17,
     patientAgeMax: 80,
-    firstSymptomsTimeMin: 270,
-    firstSymptomsTimeMax: 4320,
+    firstSymptomsTimeMin: 4.5,
+    firstSymptomsTimeMax: 72,
   };
 
   // контролированный чекбокс по параметрам
@@ -206,33 +206,6 @@ export const CheckListDetails = () => {
   const [checkAlertSimptomHh, setCheckAlertSimptomHh] = useState(0);
   const [checkAlertSimptomMm, setCheckAlertSimptomMm] = useState(0);
   const [checkDateAlertSimptomDate, setCheckDateAlertSimptomDate] = useState(0);
-  // console.log('checkAlertSimptomDate', checkAlertSimptomDate);
-  // console.log('checkAlertSimptomHh', checkAlertSimptomHh);
-  // console.log('checkAlertSimptomMm', checkAlertSimptomMm);
-
-  // if (checkAlertSimptomDate) {
-  //   let checkAlert = '';
-  //   checkAlert =
-  //     (new Date() -
-  //       new Date(
-  //         `${checkAlertSimptomDate}  ${
-  //           checkAlertSimptomHh.length < 2
-  //             ? 0 + checkAlertSimptomHh
-  //             : checkAlertSimptomHh
-  //         }:${
-  //           checkAlertSimptomMm.length < 2
-  //             ? 0 + checkAlertSimptomMm
-  //             : checkAlertSimptomMm
-  //         }:00`
-  //       )) /
-  //     60000;
-  //   console.log(checkAlert);
-  //   // setCheckDateAlertSimptomDate(checkAlert);
-  // }
-
-  console.log(checkDateAlertSimptomDate);
-
-  // ==================>
 
   useEffect(() => {
     (async function getData() {
@@ -460,7 +433,7 @@ export const CheckListDetails = () => {
     })();
   }, [id]);
 
-  const momentCheckDate = moment(checkDateAlertSimptomDate);
+  // const momentCheckDate = moment(checkDateAlertSimptomDate);
   const today = moment();
   const firstSymptomDate = moment(
     `${checkAlertSimptomDate} ${checkAlertSimptomHh}:${checkAlertSimptomMm}`,
@@ -468,7 +441,7 @@ export const CheckListDetails = () => {
   );
   
   const hoursDifference = today.diff(firstSymptomDate, 'hours');
-  
+
   let message;
   if (hoursDifference >= 72) {
     message = 'Более 72 часов';
@@ -476,19 +449,16 @@ export const CheckListDetails = () => {
     message = 'Более 4,5 часов';
   } else {
   }
-  console.log(message);
+
+
+  useEffect (()=>{
+    if(hoursDifference){ setCheckDateAlertSimptomDate(+hoursDifference)}},[hoursDifference]);
 
   const handleSubmit = async e => {
     e.preventDefault();
-
     const identifier = id;
-    // const data_numberHospital = inputData.numberHospital;
-    // const data_hospitalizationTime = inputData.hospitalizationTime;
-    // const data_hospitalizationDate = inputData.hospitalizationDate;
-
     try {
       setIsLoading(true);
-      // hospitalizationTime=${inputDataHospitalizationTime}&hospitalizationDate=${inputDataHospitalizationDate}
       const res = await fetchData(
         `edit?identifier=${identifier}&numberHospital=${inputDataNumberHospital}
         &inputDataHospitalizationTimeDate=${inputDataHospitalizationTimeDate}&patientFullName_defect=${patientFullName_defect}&patientINN_defect=${patientINN_defect}&patientSex_defect=${patientSex_defect}
@@ -732,9 +702,6 @@ export const CheckListDetails = () => {
        }
   `;
     clipboardCopy(patientData);
-    // ${data?.hospitalizationTime || ''}  ${
-    //   data?.hospitalizationDate || ''
-    // }
     navigator.clipboard.writeText(patientData).then(() => {
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 3000);
@@ -1033,7 +1000,7 @@ export const CheckListDetails = () => {
               <Tr>
                 <TdRed
                   $props={
-                    checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin
+                    (checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin)
                       ? theme.colors.accentCoral
                       : theme.colors.darkGrey
                   }
@@ -1042,7 +1009,7 @@ export const CheckListDetails = () => {
                 </TdRed>
                 <TdRed
                   $props={
-                    checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin
+                    (checkDateAlertSimptomDate > checkData.firstSymptomsTimeMin)
                       ? theme.colors.accentCoral
                       : theme.colors.darkGrey
                   }

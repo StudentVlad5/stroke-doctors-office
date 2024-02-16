@@ -5,7 +5,7 @@ import {
   } from './ActiveListItems.styled';
 import { removeItem } from 'services/localStorService';
 import { theme } from 'components/baseStyles/Variables.styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchData } from 'services/APIservice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
@@ -15,9 +15,10 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
     const [uniqueChecklists, setUniqueChecklists] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    let timer = useRef(null); 
 
     useEffect(() => {
-      (async function getData() {
+      const getData = async() => {
         setIsLoading(true);
         try {
           const { data } = await fetchData('read?identifier=new');
@@ -40,9 +41,13 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
           setError(error);
         } finally {
           setIsLoading(false);
-          setTimeout(()=>getData(), 60000)
         }
-      })();
+      };
+      getData();
+      timer.current = setInterval(()=>getData(), 60000);
+      return () => {clearInterval(timer.current); 
+        timer.current = null;
+      };
     }, []);
 
     return (

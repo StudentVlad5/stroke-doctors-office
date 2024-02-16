@@ -492,42 +492,42 @@ export const CheckListDetails = () => {
     Номер телефона: ${data?.numberPhone ? data?.numberPhone : ''}
 
     Личные данные пациента:
-      ФИО пациента: ${data?.patientFullName ? data?.patientFullName : ''}
-      ИИН пациента: ${data?.patientINN ? data?.patientINN : ''}
-      Пол пациента: ${data?.patientSex ? data?.patientSex : ''}
+      ФИО пациента: ${data?.patientFullName ? data?.patientFullName : ''} ${patientFullName_defect === true? '/ Даннные неверны' : ''}
+      ИИН пациента: ${data?.patientINN ? data?.patientINN : ''} ${patientINN_defect === true? '/ Даннные неверны' : ''}
+      Пол пациента: ${data?.patientSex ? data?.patientSex : ''} ${patientSex_defect === true? '/ Даннные неверны' : ''}
       Визуальное описание: ${
         data?.visualDescription ? data?.visualDescription : ''
-      }
+      } ${visualDescription_defect === true? '/ Даннные неверны' : ''}
 
     Методика BE FAST:
       Потеря равновесия:  ${
         data?.lossOfBalance && data?.lossOfBalance.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${lossOfBalance_defect === true? '/ Даннные неверны' : ''}
       Проблемы со зрением, двоение в глазах:${
         data?.visionProblems && data?.visionProblems.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${visionProblems_defect === true? '/ Даннные неверны' : ''}
       Провисание на лице: ${
         data?.saggingFace && data?.saggingFace.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${saggingFace_defect === true? '/ Даннные неверны' : ''}
       Смещение рук: ${
         data?.handDisplacement && data?.handDisplacement.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${handDisplacement_defect === true? '/ Даннные неверны' : ''}
       Нарушения речи: ${
         data?.speechDisorders && data?.speechDisorders.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${speechDisorders_defect === true? '/ Даннные неверны' : ''}
       Время появления первых симптомов: ${data?.firstSymptomsTimeHh}:${
       data?.firstSymptomsTimeMm
-    } / ${data?.firstSymptomsDate}
+    } / ${data?.firstSymptomsDate} ${firstSymptomsTime_defect === true? '/ Даннные неверны' : ''}
 
     Действия при подозрении на инсульт: 
       Начата процедура лечения инсульта: ${
@@ -535,34 +535,34 @@ export const CheckListDetails = () => {
         data?.beginStrokeTreatment.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${beginStrokeTreatment_defect === true? '/ Даннные неверны' : ''}
       Установлен внутривенный доступ: ${
         data?.intravenousAccess && data?.intravenousAccess.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${intravenousAccess_defect === true? '/ Даннные неверны' : ''}
       Пациент принимает антикоагулянты: ${
         data?.patientTakingAnticoagulants &&
         data?.patientTakingAnticoagulants.toString() === 'true'
           ? 'Да'
           : 'Нет'
-      }
+      } ${patientTakingAnticoagulants_defect === true? '/ Даннные неверны' : ''}
       У пациента снято ЭКГ: ${data?.ecgTakenHH ? data?.ecgTakenHH : ''} : ${
       data?.ecgTakenMM ? data?.ecgTakenMM : ''
-    } 
+    }  ${ecgTaken_defect === true? '/ Даннные неверны' : ''}
       
     Физиологические параметры:
       Содержание сахара в крови: ${
         data?.bloodSugarLevel ? data?.bloodSugarLevel : ''
-      } ммоль/л
-      Температура тела: ${data?.bodyTemperature ? data?.bodyTemperature : ''} °C
+      } ммоль/л ${bloodSugarLevel_defect === true? '/ Даннные неверны' : ''}
+      Температура тела: ${data?.bodyTemperature ? data?.bodyTemperature : ''} °C ${bodyTemperature_defect === true? '/ Даннные неверны' : ''}
       Артериальное давление: ${
         data?.arterialPressureS ? data?.arterialPressureS : ''
-      }/${data?.arterialPressureD ? data?.arterialPressureD : ''} мм. рт. ст.
+      }/${data?.arterialPressureD ? data?.arterialPressureD : ''} мм. рт. ст. ${arterialPressure_defect === true? '/ Даннные неверны' : ''}
       Масса тела пациента: ${
         data?.patientBodyWeight ? data?.patientBodyWeight : ''
-      } кг
-      Возраст пациента: ${data?.patientAge ? data?.patientAge : ''} лет
+      } кг ${patientBodyWeight_defect === true? '/ Даннные неверны' : ''}
+      Возраст пациента: ${data?.patientAge ? data?.patientAge : ''} лет ${patientAge_defect === true? '/ Даннные неверны' : ''}
 
     Анамнез:
       Внутричерепные кровоизлияния: ${
@@ -570,80 +570,80 @@ export const CheckListDetails = () => {
         data?.intracranialHemorrhages.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${intracranialHemorrhages_defect === true? '/ Даннные неверны' : ''}
       Большие операции или тяжелые травмы за последние 14 суток: ${
         data?.majorSurgeriesOrSevereInjuries &&
         data?.majorSurgeriesOrSevereInjuries.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${majorSurgeriesOrSevereInjuries_defect === true? '/ Даннные неверны' : ''}
       Недавние внутричерепные или интраспинальные хирургические вмешательства: ${
         data?.surgicalInterventions &&
         data?.surgicalInterventions.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${surgicalInterventions_defect === true? '/ Даннные неверны' : ''}
       Инфаркт миокарда в предшествующие инсульту 3 месяца: ${
         data?.myocardialInfarction &&
         data?.myocardialInfarction.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${myocardialInfarction_defect === true? '/ Даннные неверны' : ''}
       Инсульт в предшествующие инсульту 3 месяца: ${
         data?.stroke && data?.stroke.toString() === 'true' ? 'Да' : '-'
-      }
+      } ${stroke_defect === true? '/ Даннные неверны' : ''}
       Проведена пункция артерии в сложной для компрессии области в предшествующие инсульту 7 дней: ${
         data?.arterialPuncture && data?.arterialPuncture.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${arterialPuncture_defect === true? '/ Даннные неверны' : ''}
       Малые операции или инвазивные вмешательства в последние 10 дней: ${
         data?.smallOperations && data?.smallOperations.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${smallOperations_defect === true? '/ Даннные неверны' : ''}
       Сердечно-сосудистые заболевания (подострый бактериальный эндокардит, острый перикардит): ${
         data?.cardiovascularDiseases &&
         data?.cardiovascularDiseases.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${cardiovascularDiseases_defect === true? '/ Даннные неверны' : ''}
       Острое инфекционное заболевание: ${
         data?.acuteInfectiousDisease &&
         data?.acuteInfectiousDisease.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${acuteInfectiousDisease_defect === true? '/ Даннные неверны' : ''}
       Кровоизлияния в ЖКТ и мочевыводящих путях не позднее 21 дня до инсульта: ${
         data?.hemorrhagicStroke && data?.hemorrhagicStroke.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${hemorrhagicStroke_defect === true? '/ Даннные неверны' : ''}
       Судорожные приступы в дебюте заболевания (имеется связь с острой церебральной ишемией): ${
         data?.convulsions && data?.convulsions.toString() === 'true'
           ? 'Да'
           : '-'
-      }
+      } ${convulsions_defect === true? '/ Даннные неверны' : ''}
       ОНМК ранее: ${
         (data?.hemorrhages && data?.hemorrhages.toString() === 'true') ||
         (data?.SACStroke && data?.SACStroke.toString() === 'true') ||
         (data?.ischemicStroke && data?.ischemicStroke.toString() === 'true')
           ? 'Да'
           : ''
-      }
+      } ${onmk_defect === true? '/ Даннные неверны' : ''}
        Гемморагический: ${
          data?.hemorrhages && data?.hemorrhages.toString() === 'true'
            ? 'Да'
            : '-'
-       }
+       } ${hemorrhages_defect === true? '/ Даннные неверны' : ''}
        САК: ${
          data?.SACStroke && data?.SACStroke.toString() === 'true' ? 'Да' : '-'
-       }
+       } ${SACStroke_defect === true? '/ Даннные неверны' : ''}
        Ишемический инсульт: ${
          data?.ischemicStroke && data?.ischemicStroke.toString() === 'true'
            ? 'Да'
            : '-'
-       }
+       } ${ischemicStroke_defect === true? '/ Даннные неверны' : ''}
 
     Данные по заполнителю:
       ФИО сотрудника: ${
@@ -673,19 +673,19 @@ export const CheckListDetails = () => {
         data?.timeDateCt
           ? moment(new Date(data?.timeDateCt)).format('HH:mm DD.MM.YYYY')
           : ''
-      } 
+      } ${timeDateCt_defect === true? '/ Даннные неверны' : ''}
       Дата и время проведения ТЛТ: ${
         data?.tltTimeDate
           ? moment(new Date(data?.tltTimeDate)).format('HH:mm DD.MM.YYYY')
           : ''
-      }
+      } ${tltTimeDate_defect === true? '/ Даннные неверны' : ''}
       Дата и время госпитализации: ${
         data?.inputDataHospitalizationTimeDate
           ? moment(new Date(data?.inputDataHospitalizationTimeDate)).format(
               'HH:mm DD.MM.YYYY'
             )
           : ''
-      }
+      } ${inputDataHospitalizationTimeDate_defect === true? '/ Даннные неверны' : ''}
       
       Заключительное решение:
        Госпитализация в Инсультный центр: ${

@@ -411,11 +411,13 @@ export const StylesCheckBoxItem = styled.div`
   cursor: pointer;
 `;
 export const CheckIcon = styled(checkIcon)`
-  fill: #be0b00;
+  /* fill: red; */
   width: 36px;
   height: 36px;
   opacity: ${props => props.$props};
+  fill: ${props => props.$fill};
   user-select: none;
+  stroke: ${props => props.$fill};
 `;
 
 export const DecisionBox = styled.div`

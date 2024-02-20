@@ -776,6 +776,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={patientFullName_defect ? '1' : '0.5'}
+                        $fill={patientFullName_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -797,7 +798,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={patientINN_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={patientINN_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={patientINN_defect ? '1' : '0.5'}
+                      $fill={patientINN_defect ? '#ED2939' : 'grey'} />
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -818,7 +820,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={patientSex_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={patientSex_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={patientSex_defect ? '1' : '0.5'} 
+                      $fill={patientSex_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -843,6 +846,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={visualDescription_defect ? '1' : '0.5'}
+                        $fill={visualDescription_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -877,7 +881,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={lossOfBalance_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={lossOfBalance_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={lossOfBalance_defect ? '1' : '0.5'} 
+                      $fill={lossOfBalance_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -905,7 +910,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={visionProblems_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={visionProblems_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={visionProblems_defect ? '1' : '0.5'} 
+                      $fill={visionProblems_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -932,7 +938,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={saggingFace_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={saggingFace_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={saggingFace_defect ? '1' : '0.5'} 
+                      $fill={saggingFace_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -962,6 +969,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={handDisplacement_defect ? '1' : '0.5'}
+                        $fill={handDisplacement_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -992,6 +1000,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={speechDisorders_defect ? '1' : '0.5'}
+                        $fill={speechDisorders_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1054,6 +1063,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={firstSymptomsTime_defect ? '1' : '0.5'}
+                        $fill={firstSymptomsTime_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1092,6 +1102,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={beginStrokeTreatment_defect ? '1' : '0.5'}
+                        $fill={beginStrokeTreatment_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1122,6 +1133,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={intravenousAccess_defect ? '1' : '0.5'}
+                        $fill={intravenousAccess_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1158,6 +1170,7 @@ export const CheckListDetails = () => {
                         $props={
                           patientTakingAnticoagulants_defect ? '1' : '0.5'
                         }
+                        $fill={patientTakingAnticoagulants_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1181,7 +1194,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={ecgTaken_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={ecgTaken_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={ecgTaken_defect ? '1' : '0.5'} 
+                      $fill={ecgTaken_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -1243,6 +1257,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={bloodSugarLevel_defect ? '1' : '0.5'}
+                        $fill={bloodSugarLevel_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1299,6 +1314,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={bodyTemperature_defect ? '1' : '0.5'}
+                        $fill={bodyTemperature_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1358,6 +1374,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={arterialPressure_defect ? '1' : '0.5'}
+                        $fill={arterialPressure_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1384,6 +1401,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={patientBodyWeight_defect ? '1' : '0.5'}
+                        $fill={patientBodyWeight_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1433,7 +1451,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={patientAge_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={patientAge_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={patientAge_defect ? '1' : '0.5'} 
+                      $fill={patientAge_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -1488,6 +1507,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={intracranialHemorrhages_defect ? '1' : '0.5'}
+                        $fill={intracranialHemorrhages_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1539,7 +1559,8 @@ export const CheckListDetails = () => {
                       <CheckIcon
                         $props={
                           majorSurgeriesOrSevereInjuries_defect ? '1' : '0.5'
-                        }
+                        } 
+                        $fill={majorSurgeriesOrSevereInjuries_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1589,6 +1610,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={surgicalInterventions_defect ? '1' : '0.5'}
+                        $fill={surgicalInterventions_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1637,6 +1659,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={myocardialInfarction_defect ? '1' : '0.5'}
+                        $fill={myocardialInfarction_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1674,7 +1697,9 @@ export const CheckListDetails = () => {
                       checked={stroke_defect}
                     ></CheckBoxItem>
                     <StylesCheckBoxItem $props={stroke_defect ? '4px' : '1px'}>
-                      <CheckIcon $props={stroke_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={stroke_defect ? '1' : '0.5'} 
+                      $fill={stroke_defect ? '#ED2939' : 'grey'}
+                      />
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -1721,6 +1746,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={arterialPuncture_defect ? '1' : '0.5'}
+                        $fill={arterialPuncture_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1768,6 +1794,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={smallOperations_defect ? '1' : '0.5'}
+                        $fill={smallOperations_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1817,6 +1844,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={cardiovascularDiseases_defect ? '1' : '0.5'}
+                        $fill={cardiovascularDiseases_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1864,7 +1892,7 @@ export const CheckListDetails = () => {
                       $props={acuteInfectiousDisease_defect ? '4px' : '1px'}
                     >
                       <CheckIcon
-                        $props={acuteInfectiousDisease_defect ? '1' : '0.5'}
+                        $props={acuteInfectiousDisease_defect ? '1' : '0.5'}$fill={acuteInfectiousDisease_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1912,6 +1940,7 @@ export const CheckListDetails = () => {
                     >
                       <CheckIcon
                         $props={hemorrhagicStroke_defect ? '1' : '0.5'}
+                        $fill={hemorrhagicStroke_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>
@@ -1954,7 +1983,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={convulsions_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={convulsions_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={convulsions_defect ? '1' : '0.5'} $fill={convulsions_defect ? '#ED2939' : 'grey'}
+                      />
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -2005,7 +2035,9 @@ export const CheckListDetails = () => {
                       checked={onmk_defect}
                     ></CheckBoxItem>
                     <StylesCheckBoxItem $props={onmk_defect ? '4px' : '1px'}>
-                      <CheckIcon $props={onmk_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={onmk_defect ? '1' : '0.5'} 
+                      $fill={onmk_defect ? '#ED2939' : 'grey'}
+                      />
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -2047,7 +2079,9 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={hemorrhages_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={hemorrhages_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={hemorrhages_defect ? '1' : '0.5'} 
+                      $fill={hemorrhages_defect ? '#ED2939' : 'grey'}
+                      />
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -2087,7 +2121,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={SACStroke_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={SACStroke_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={SACStroke_defect ? '1' : '0.5'} 
+                      $fill={SACStroke_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -2132,7 +2167,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={ischemicStroke_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={ischemicStroke_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={ischemicStroke_defect ? '1' : '0.5'} 
+                      $fill={ischemicStroke_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </TdCheckCorrectItem>
@@ -2269,7 +2305,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={timeDateCt_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={timeDateCt_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={timeDateCt_defect ? '1' : '0.5'} 
+                      $fill={timeDateCt_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </DivForLabelDateTime>
@@ -2311,7 +2348,8 @@ export const CheckListDetails = () => {
                     <StylesCheckBoxItem
                       $props={tltTimeDate_defect ? '4px' : '1px'}
                     >
-                      <CheckIcon $props={tltTimeDate_defect ? '1' : '0.5'} />
+                      <CheckIcon $props={tltTimeDate_defect ? '1' : '0.5'} 
+                      $fill={tltTimeDate_defect ? '#ED2939' : 'grey'}/>
                     </StylesCheckBoxItem>
                   </label>
                 </DivForLabelDateTime>
@@ -2365,6 +2403,7 @@ export const CheckListDetails = () => {
                         $props={
                           inputDataHospitalizationTimeDate_defect ? '1' : '0.5'
                         }
+                        $fill={inputDataHospitalizationTimeDate_defect ? '#ED2939' : 'grey'}
                       />
                     </StylesCheckBoxItem>
                   </label>

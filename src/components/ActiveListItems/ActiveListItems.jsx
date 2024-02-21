@@ -9,10 +9,14 @@ import { useEffect, useRef, useState } from 'react';
 import { fetchData } from 'services/APIservice';
 import { onFetchError } from 'helpers/Messages/NotifyMessages';
 import { onLoaded, onLoading } from 'helpers/Loader/Loader';
+import sound from '../../mp3/ambulance.mp3';
 
   export const ActiveListItems = () => {
     const [checklists, setChecklists] = useState([]);
     const [uniqueChecklists, setUniqueChecklists] = useState([]);
+    const [arrayOfIdentifier, setArrayOfIdentifier] = useState([]);
+    const [count, setCount] = useState(true);
+    const [playStatus, setPlayStatus] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     let timer = useRef(null); 
@@ -37,6 +41,16 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
           uniqueIdentifier.sort(function (a, b) {return b - a});
           uniqueIdentifier.map(it=> uniqueChecklists.push(data.normal.find(element=> element.identifier === it)));
           setUniqueChecklists(uniqueChecklists);
+          if(count){ 
+            setArrayOfIdentifier(uniqueIdentifier); 
+            setCount(false);
+          } 
+          if(!count){for(let it of uniqueIdentifier){
+              if(arrayOfIdentifier.includes(it) === false)
+              {
+                setPlayStatus(true); 
+                setCount(true);
+            }}};
         } catch (error) {
           setError(error);
         } finally {
@@ -48,7 +62,19 @@ import { onLoaded, onLoading } from 'helpers/Loader/Loader';
       return () => {clearInterval(timer.current); 
         timer.current = null;
       };
-    }, []);
+    }, [arrayOfIdentifier, count]);
+
+    useEffect(()=>{
+      const player = new Audio(sound);
+      player.mute = true;
+      player.volume = 0.2;
+      const playSound = () =>{
+            player.play();
+            setTimeout(()=>setPlayStatus(false),[30000]);
+      }
+      if(playStatus){playSound()};
+    },[playStatus])
+
 
     return (
       <ActiveListItemsSection>

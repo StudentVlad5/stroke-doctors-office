@@ -165,6 +165,7 @@ export const ArchiveTable = () => {
           .toLowerCase()
           .includes(filters['filterStatusChecklist']) &&
         moment(new Date(+item.identifier))
+          .zone("+06:00")
           .format('DD.MM.YYYY')
           .includes(filters['filterDateStartChecklist']) &&
         time?.join('').includes(filters['filterTimeStartChecklist'])
@@ -217,7 +218,7 @@ export const ArchiveTable = () => {
       'Поликлиника прикрепления': checklist?.numberHospital ? checklist?.numberHospital : '',
       'Идентификатор сотрудника': checklist?.employeeID ? checklist?.employeeID : '',
       'Статус чек-листа': checklist?.checkStatus ? checklist?.checkStatus : '',
-      'Дата Чек-листа': checklist?.identifier ? moment(new Date(+checklist?.identifier)).format(
+      'Дата Чек-листа': checklist?.identifier ? moment(new Date(+checklist?.identifier)).zone("+06:00").format(
         'DD.MM.YYYY'
       ) : '',
       'Время начала чек-листа': `${checklist.startTimeAutoHh}:${checklist.startTimeAutoMm}`,
@@ -508,7 +509,7 @@ export const ArchiveTable = () => {
                   <TableData>{item.employeeID}</TableData>
                   <TableData>{item.checkStatus}</TableData>
                   <TableData>
-                    {moment(new Date(+item?.identifier)).format('DD.MM.YYYY')}
+                    {moment(new Date(+item?.identifier)).zone("+06:00").format('DD.MM.YYYY')}
                   </TableData>
                   {item.startTimeAutoHh && item.startTimeAutoMm ? (
                     <TableData>

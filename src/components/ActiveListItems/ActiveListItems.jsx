@@ -20,7 +20,8 @@ import sound from '../../mp3/spokoynyiy-zvuk-poyavleniya-v-sisteme.mp3';
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     let timer = useRef(null); 
-
+    navigator.mediaDevices.getUserMedia({ audio: true });
+    
     useEffect(() => {
       const getData = async() => {
         setIsLoading(true);
@@ -102,7 +103,7 @@ import sound from '../../mp3/spokoynyiy-zvuk-poyavleniya-v-sisteme.mp3';
                 uniqueChecklists.map((item)=>(item?.identifier !== undefined && item?.identifier !== '') && <ItemContainer key={item?.identifier} data-info={item?.identifier}>
                     <ItemInfo>
                       <p>Чек-лист №{item?.identifier}</p>
-                      <p>от {moment(new Date(+item?.identifier)).format("DD/MM/YYYY")}</p>
+                      <p>от {moment(new Date(+item?.identifier)).zone("+06:00").format("DD/MM/YYYY")}</p>
                       <p><br/>Бригада №{item?.application_number}</p>
                       <p><br/>Время прибытия в больницу <br/>{(item?.deliveryTimeHh && item?.deliveryTimeHh.length < 2) ? "0" + item?.deliveryTimeHh : item?.deliveryTimeHh} : {(item?.deliveryTimeMm && item?.deliveryTimeMm.length < 2) ? "0" + item?.deliveryTimeMm : item?.deliveryTimeMm}</p>
                       <p><br/>Номер телефона: <br/>{item?.numberPhone}</p>

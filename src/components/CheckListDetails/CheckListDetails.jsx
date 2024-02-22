@@ -438,7 +438,7 @@ export const CheckListDetails = () => {
   const firstSymptomDate = moment(
     `${checkAlertSimptomDate} ${checkAlertSimptomHh}:${checkAlertSimptomMm}`,
     'YYYY-MM-DD HH:mm'
-  );
+  ).zone("+06:00");
   
   const hoursDifference = today.diff(firstSymptomDate, 'hours');
 
@@ -482,7 +482,7 @@ export const CheckListDetails = () => {
     Чек-лист №${data?.identifier ? data?.identifier : ''}
     от ${
       data?.identifier
-        ? moment(new Date(+data?.identifier)).format('DD/MM/YYYY')
+        ? moment(new Date(+data?.identifier)).zone("+06:00").format('DD/MM/YYYY')
         : ''
     }
     Бригада ${data?.application_number ? data?.application_number : ''}
@@ -656,12 +656,12 @@ export const CheckListDetails = () => {
         data?.startTimeAutoHh ? data?.startTimeAutoHh : ' '
       }:${data?.startTimeAutoMm ? data?.startTimeAutoMm : ' '} ${moment(
       new Date(+data?.identifier)
-    ).format('DD.MM.YYYY')}
+    ).zone("+06:00").format('DD.MM.YYYY')}
       Заполнение чек-листа завершено:${
         data?.endTimeAutoHh ? data?.endTimeAutoHh : ' '
       }:${data?.endTimeAutoMm ? data?.endTimeAutoMm : ' '} ${moment(
       new Date(+data?.identifier)
-    ).format('DD.MM.YYYY')}
+    ).zone("+06:00").format('DD.MM.YYYY')}
       Примечание к чек-листу от СМП: ${data?.noteChecklistSMP || ''}
 
     Дополнительная информация от инсультного центра:
@@ -671,17 +671,17 @@ export const CheckListDetails = () => {
     }
       Дата и время проведения КТ: ${
         data?.timeDateCt
-          ? moment(new Date(data?.timeDateCt)).format('HH:mm DD.MM.YYYY')
+          ? moment(new Date(data?.timeDateCt)).zone("+06:00").format('HH:mm DD.MM.YYYY')
           : ''
       } ${timeDateCt_defect === true? '/ Даннные неверны' : ''}
       Дата и время проведения ТЛТ: ${
         data?.tltTimeDate
-          ? moment(new Date(data?.tltTimeDate)).format('HH:mm DD.MM.YYYY')
+          ? moment(new Date(data?.tltTimeDate)).zone("+06:00").format('HH:mm DD.MM.YYYY')
           : ''
       } ${tltTimeDate_defect === true? '/ Даннные неверны' : ''}
       Дата и время госпитализации: ${
         data?.inputDataHospitalizationTimeDate
-          ? moment(new Date(data?.inputDataHospitalizationTimeDate)).format(
+          ? moment(new Date(data?.inputDataHospitalizationTimeDate)).zone("+06:00").format(
               'HH:mm DD.MM.YYYY'
             )
           : ''
@@ -724,7 +724,7 @@ export const CheckListDetails = () => {
             {data?.time}
             <CheckListText>
               Чек-лист №{data?.identifier} <br />
-              от {moment(new Date(+data?.identifier)).format('DD/MM/YYYY')}
+              от {moment(new Date(+data?.identifier)).zone("+06:00").format('DD/MM/YYYY')}
               <br />
               Бригада №{data?.application_number}
               <br />
@@ -2201,7 +2201,7 @@ export const CheckListDetails = () => {
                   {data?.startTimeAutoMm && data?.startTimeAutoMm.length < 2
                     ? '0' + data?.startTimeAutoMm
                     : data?.startTimeAutoMm}{' '}
-                  {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
+                  {moment(new Date(+data?.identifier)).zone("+06:00").format('DD.MM.YYYY')}
                 </Td>
               </Tr>
 
@@ -2215,7 +2215,7 @@ export const CheckListDetails = () => {
                   {data?.endTimeAutoMm && data?.endTimeAutoMm.length < 2
                     ? '0' + data?.endTimeAutoMm
                     : data?.endTimeAutoMm}{' '}
-                  {moment(new Date(+data?.identifier)).format('DD.MM.YYYY')}
+                  {moment(new Date(+data?.identifier)).zone("+06:00").format('DD.MM.YYYY')}
                 </Td>
               </Tr>
 

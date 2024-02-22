@@ -40,7 +40,11 @@ img {
 .rowTable {
   border-right: none
 }
-
+.hideButton{
+  /* cursor: none; */
+  opacity: 0;
+  /* visibility: hidden */
+}
 // ----pagination----//
 .table-filter-info {
   position:absolute;

@@ -20,7 +20,8 @@ import sound from '../../mp3/spokoynyiy-zvuk-poyavleniya-v-sisteme.mp3';
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     let timer = useRef(null); 
-    navigator.mediaDevices.getUserMedia({ audio: true });
+    // navigator.mediaDevices.getUserMedia({ audio: true });
+
     
     useEffect(() => {
       const getData = async() => {
@@ -66,12 +67,13 @@ import sound from '../../mp3/spokoynyiy-zvuk-poyavleniya-v-sisteme.mp3';
     }, [arrayOfIdentifier, count]);
 
     useEffect(()=>{
-      const player = new Audio(sound);
-      player.mute = true;
-      player.volume = 0.2;
       const playSound = () =>{
-            player.play();
-            setTimeout(()=>setPlayStatus(false),[30000]);
+            // player.play();
+            document.getElementById('sound1').volume = 0.5;
+            document.getElementById('sound1').mute = true;
+            document.getElementById('sound1').play();
+            document.getElementById('sound').click();
+            setTimeout(()=>setPlayStatus(false),[3000]);
       }
       if(playStatus){playSound()};
     },[playStatus])
@@ -316,6 +318,8 @@ import sound from '../../mp3/spokoynyiy-zvuk-poyavleniya-v-sisteme.mp3';
                     </ItemStatistic>
                 </ItemContainer>)}
             </ItemsContainer>
+            <audio id="sound1" src={sound}></audio>
+            <button className="hideButton" type="button" id="sound" onClick={()=>setPlayStatus(true)}>Play</button>
         </ActiveListItemsContainer>
       </ActiveListItemsSection>
     );
